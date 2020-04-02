@@ -1,4 +1,3 @@
-
 import java_cup.runtime.Symbol;
 
 %%
@@ -9,11 +8,11 @@ import java_cup.runtime.Symbol;
 %type Symbol
 
 %{
-  private Symbol token(int id, Object value) {
-    return new Symbol(id, yychar, yyline, value);
+  def token(id, value) {
+    return Symbol(id, yychar, yyline, value);
   }
 
-  private Symbol token(int id) {
+  def token(int id) {
     return token(id, yytext());
   }
 %}
@@ -24,50 +23,46 @@ import java_cup.runtime.Symbol;
 
 %%
 
-add			{ return token(sym.ADD); }
-sub			{ return token(sym.SUB); }
-mult			{ return token(sym.MULT); }
-div			{ return token(sym.DIV); }
-mod			{ return token(sym.MOD); }
-exp			{ return token(sym.EXP); }
+add		    	        { return token(sym.ADD); }
+sub		    	        { return token(sym.SUB); }
+mult	    		    { return token(sym.MULT); }
+div		    	        { return token(sym.DIV); }
+mod			            { return token(sym.MOD); }
+exp			            { return token(sym.EXP); }
 
-push_int		{ return token(sym.PUSH_INT); }
-push_var		{ return token(sym.PUSH_VAR); }
-push_arg		{ return token(sym.PUSH_ARG); }
+push_int		        { return token(sym.PUSH_INT); }
+push_var		        { return token(sym.PUSH_VAR); }
+push_arg		        { return token(sym.PUSH_ARG); }
 
-store_var		{ return token(sym.STORE_VAR); }
-store_arg		{ return token(sym.STORE_ARG); }
+store_var	    	    { return token(sym.STORE_VAR); }
+store_arg	    	    { return token(sym.STORE_ARG); }
 
-set_arg			{ return token(sym.SET_ARG); }
-call			{ return token(sym.CALL); }
-locals			{ return token(sym.LOCALS); }
-return			{ return token(sym.RETURN); }
+set_arg		    	    { return token(sym.SET_ARG); }
+call		    	    { return token(sym.CALL); }
+locals		    	    { return token(sym.LOCALS); }
+return		    	    { return token(sym.RETURN); }
 
-jump			{ return token(sym.JUMP); }
-jeq			{ return token(sym.JEQ); }
-jlt			{ return token(sym.JLT); }
+jump			        { return token(sym.JUMP); }
+jeq			            { return token(sym.JEQ); }
+jlt			            { return token(sym.JLT); }
 
-print			{ return token(sym.PRINT); }
-print_str			{ return token(sym.PRINT_STR); }
-print_nl			{ return token(sym.PRINT_NL); }
+print			        { return token(sym.PRINT); }
+print_str			    { return token(sym.PRINT_STR); }
+print_nl			    { return token(sym.PRINT_NL); }
 
 [a-zA-Z][a-zA-Z0-9_]*	{ return token(sym.IDENTIFICADOR, yytext()); }
 
-:			{ return token(sym.DOIS_PONTOS); }
+:		            	{ return token(sym.DOIS_PONTOS); }
 
--?[0-9]+		{ return token(sym.INTEIRO, yytext()); }
-\"(\\[\\\"]|[^\"\\])*\"	{
-			  String s = yytext();
+-?[0-9]+	        	{ return token(sym.INTEIRO, yytext()); }
+\"(\\[\\\"]|[^\"\\])*\"	{ String s = yytext();
+                          return token(sym.STRING, s.substring(1,s.length()-1));
+			            }
 
-			  return token(sym.STRING, s.substring(1,s.length()-1));
-			}
+[\ \n\t]		        { /* ignora brancos */ }
 
-[\ \n\t]		{ /* ignora brancos */ }
+#.*			            { /* e comentarios */ }
 
-#.*			{ /* e comentarios */ }
-
-.	      {
-	        System.err.println("** Caracter invalido: `" + yytext() + "'");
-
-		return token(sym.ERRO);
-	      }
+.	                    { System.err.println("** Caracter invalido: `" + yytext() + "'");
+                		  return token(sym.ERRO);
+                		}

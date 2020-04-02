@@ -13,8 +13,7 @@ parser code {:
     Symbol info = (Symbol) error_info;
 
     System.err.print("** " + message);
-    System.err.println(" at `" + info.value + "' in position " + info.left
-		       + " **");
+    System.err.println(" at `" + info.value + "' in position " + info.left + " **");
   }
 
   public void report_fatal_error(String message, Object _) {
@@ -34,7 +33,7 @@ terminal        PUT, PUT_STR, PUT_NL ;
 terminal String IDENTIFICADOR ;
 terminal String	INTEIRO, STRING ;
 terminal        DOIS_PONTOS;
-terminal	ERRO ;
+terminal	    ERRO ;
 
 non terminal TISC programa ;
 non terminal      etiqueta, instrucao ;
@@ -62,7 +61,7 @@ instrucao ::=
 	  |   STORE_VAR INTEIRO:d INTEIRO:n
 	  |   STORE_ARG INTEIRO:d INTEIRO:n
 	  |   SET_ARG INTEIRO:n
-          |   CALL INTEIRO:d IDENTIFICADOR:p
+      |   CALL INTEIRO:d IDENTIFICADOR:p
 	  |   LOCALS INTEIRO:a INTEIRO:v
 	  |   RETURN
 	  |   JUMP IDENTIFICADOR:e
