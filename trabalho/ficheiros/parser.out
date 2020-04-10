@@ -1,0 +1,1042 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ERRO
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> programa etiqueta instrucao
+Rule 2     programa -> <empty>
+Rule 3     etiqueta -> IDENTIFICADOR DOIS_PONTOS
+Rule 4     etiqueta -> <empty>
+Rule 5     instrucao -> ADD
+Rule 6     instrucao -> SUB
+Rule 7     instrucao -> MULT
+Rule 8     instrucao -> DIV
+Rule 9     instrucao -> MOD
+Rule 10    instrucao -> EXP
+Rule 11    instrucao -> RETURN
+Rule 12    instrucao -> PRINT
+Rule 13    instrucao -> PRINT_NL
+Rule 14    instrucao -> COMENTARIO
+Rule 15    instrucao -> PUSH_INT INTEIRO
+Rule 16    instrucao -> SET_ARG INTEIRO
+Rule 17    instrucao -> JUMP IDENTIFICADOR
+Rule 18    instrucao -> JEQ IDENTIFICADOR
+Rule 19    instrucao -> JLT IDENTIFICADOR
+Rule 20    instrucao -> PRINT_STR STRING
+Rule 21    instrucao -> PUSH_VAR INTEIRO INTEIRO
+Rule 22    instrucao -> PUSH_ARG INTEIRO INTEIRO
+Rule 23    instrucao -> STORE_VAR INTEIRO INTEIRO
+Rule 24    instrucao -> STORE_ARG INTEIRO INTEIRO
+Rule 25    instrucao -> CALL INTEIRO IDENTIFICADOR
+Rule 26    instrucao -> LOCALS INTEIRO INTEIRO
+
+Terminals, with rules where they appear
+
+ADD                  : 5
+CALL                 : 25
+COMENTARIO           : 14
+DIV                  : 8
+DOIS_PONTOS          : 3
+ERRO                 : 
+EXP                  : 10
+IDENTIFICADOR        : 3 17 18 19 25
+INTEIRO              : 15 16 21 21 22 22 23 23 24 24 25 26 26
+JEQ                  : 18
+JLT                  : 19
+JUMP                 : 17
+LOCALS               : 26
+MOD                  : 9
+MULT                 : 7
+PRINT                : 12
+PRINT_NL             : 13
+PRINT_STR            : 20
+PUSH_ARG             : 22
+PUSH_INT             : 15
+PUSH_VAR             : 21
+RETURN               : 11
+SET_ARG              : 16
+STORE_ARG            : 24
+STORE_VAR            : 23
+STRING               : 20
+SUB                  : 6
+error                : 
+
+Nonterminals, with rules where they appear
+
+etiqueta             : 1
+instrucao            : 1
+programa             : 1 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . programa etiqueta instrucao
+    (2) programa -> .
+
+    IDENTIFICADOR   reduce using rule 2 (programa -> .)
+    $end            reduce using rule 2 (programa -> .)
+    ADD             reduce using rule 2 (programa -> .)
+    SUB             reduce using rule 2 (programa -> .)
+    MULT            reduce using rule 2 (programa -> .)
+    DIV             reduce using rule 2 (programa -> .)
+    MOD             reduce using rule 2 (programa -> .)
+    EXP             reduce using rule 2 (programa -> .)
+    RETURN          reduce using rule 2 (programa -> .)
+    PRINT           reduce using rule 2 (programa -> .)
+    PRINT_NL        reduce using rule 2 (programa -> .)
+    COMENTARIO      reduce using rule 2 (programa -> .)
+    PUSH_INT        reduce using rule 2 (programa -> .)
+    SET_ARG         reduce using rule 2 (programa -> .)
+    JUMP            reduce using rule 2 (programa -> .)
+    JEQ             reduce using rule 2 (programa -> .)
+    JLT             reduce using rule 2 (programa -> .)
+    PRINT_STR       reduce using rule 2 (programa -> .)
+    PUSH_VAR        reduce using rule 2 (programa -> .)
+    PUSH_ARG        reduce using rule 2 (programa -> .)
+    STORE_VAR       reduce using rule 2 (programa -> .)
+    STORE_ARG       reduce using rule 2 (programa -> .)
+    CALL            reduce using rule 2 (programa -> .)
+    LOCALS          reduce using rule 2 (programa -> .)
+
+    programa                       shift and go to state 1
+
+state 1
+
+    (0) S' -> programa .
+    (1) programa -> programa . etiqueta instrucao
+    (3) etiqueta -> . IDENTIFICADOR DOIS_PONTOS
+    (4) etiqueta -> .
+
+    IDENTIFICADOR   shift and go to state 3
+    ADD             reduce using rule 4 (etiqueta -> .)
+    SUB             reduce using rule 4 (etiqueta -> .)
+    MULT            reduce using rule 4 (etiqueta -> .)
+    DIV             reduce using rule 4 (etiqueta -> .)
+    MOD             reduce using rule 4 (etiqueta -> .)
+    EXP             reduce using rule 4 (etiqueta -> .)
+    RETURN          reduce using rule 4 (etiqueta -> .)
+    PRINT           reduce using rule 4 (etiqueta -> .)
+    PRINT_NL        reduce using rule 4 (etiqueta -> .)
+    COMENTARIO      reduce using rule 4 (etiqueta -> .)
+    PUSH_INT        reduce using rule 4 (etiqueta -> .)
+    SET_ARG         reduce using rule 4 (etiqueta -> .)
+    JUMP            reduce using rule 4 (etiqueta -> .)
+    JEQ             reduce using rule 4 (etiqueta -> .)
+    JLT             reduce using rule 4 (etiqueta -> .)
+    PRINT_STR       reduce using rule 4 (etiqueta -> .)
+    PUSH_VAR        reduce using rule 4 (etiqueta -> .)
+    PUSH_ARG        reduce using rule 4 (etiqueta -> .)
+    STORE_VAR       reduce using rule 4 (etiqueta -> .)
+    STORE_ARG       reduce using rule 4 (etiqueta -> .)
+    CALL            reduce using rule 4 (etiqueta -> .)
+    LOCALS          reduce using rule 4 (etiqueta -> .)
+
+    etiqueta                       shift and go to state 2
+
+state 2
+
+    (1) programa -> programa etiqueta . instrucao
+    (5) instrucao -> . ADD
+    (6) instrucao -> . SUB
+    (7) instrucao -> . MULT
+    (8) instrucao -> . DIV
+    (9) instrucao -> . MOD
+    (10) instrucao -> . EXP
+    (11) instrucao -> . RETURN
+    (12) instrucao -> . PRINT
+    (13) instrucao -> . PRINT_NL
+    (14) instrucao -> . COMENTARIO
+    (15) instrucao -> . PUSH_INT INTEIRO
+    (16) instrucao -> . SET_ARG INTEIRO
+    (17) instrucao -> . JUMP IDENTIFICADOR
+    (18) instrucao -> . JEQ IDENTIFICADOR
+    (19) instrucao -> . JLT IDENTIFICADOR
+    (20) instrucao -> . PRINT_STR STRING
+    (21) instrucao -> . PUSH_VAR INTEIRO INTEIRO
+    (22) instrucao -> . PUSH_ARG INTEIRO INTEIRO
+    (23) instrucao -> . STORE_VAR INTEIRO INTEIRO
+    (24) instrucao -> . STORE_ARG INTEIRO INTEIRO
+    (25) instrucao -> . CALL INTEIRO IDENTIFICADOR
+    (26) instrucao -> . LOCALS INTEIRO INTEIRO
+
+    ADD             shift and go to state 5
+    SUB             shift and go to state 6
+    MULT            shift and go to state 7
+    DIV             shift and go to state 8
+    MOD             shift and go to state 9
+    EXP             shift and go to state 10
+    RETURN          shift and go to state 11
+    PRINT           shift and go to state 12
+    PRINT_NL        shift and go to state 13
+    COMENTARIO      shift and go to state 14
+    PUSH_INT        shift and go to state 15
+    SET_ARG         shift and go to state 16
+    JUMP            shift and go to state 17
+    JEQ             shift and go to state 18
+    JLT             shift and go to state 19
+    PRINT_STR       shift and go to state 20
+    PUSH_VAR        shift and go to state 21
+    PUSH_ARG        shift and go to state 22
+    STORE_VAR       shift and go to state 23
+    STORE_ARG       shift and go to state 24
+    CALL            shift and go to state 25
+    LOCALS          shift and go to state 26
+
+    instrucao                      shift and go to state 4
+
+state 3
+
+    (3) etiqueta -> IDENTIFICADOR . DOIS_PONTOS
+
+    DOIS_PONTOS     shift and go to state 27
+
+
+state 4
+
+    (1) programa -> programa etiqueta instrucao .
+
+    IDENTIFICADOR   reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    $end            reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    ADD             reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    SUB             reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    MULT            reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    DIV             reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    MOD             reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    EXP             reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    RETURN          reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    PRINT           reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    PRINT_NL        reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    COMENTARIO      reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    PUSH_INT        reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    SET_ARG         reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    JUMP            reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    JEQ             reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    JLT             reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    PRINT_STR       reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    PUSH_VAR        reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    PUSH_ARG        reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    STORE_VAR       reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    STORE_ARG       reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    CALL            reduce using rule 1 (programa -> programa etiqueta instrucao .)
+    LOCALS          reduce using rule 1 (programa -> programa etiqueta instrucao .)
+
+
+state 5
+
+    (5) instrucao -> ADD .
+
+    IDENTIFICADOR   reduce using rule 5 (instrucao -> ADD .)
+    $end            reduce using rule 5 (instrucao -> ADD .)
+    ADD             reduce using rule 5 (instrucao -> ADD .)
+    SUB             reduce using rule 5 (instrucao -> ADD .)
+    MULT            reduce using rule 5 (instrucao -> ADD .)
+    DIV             reduce using rule 5 (instrucao -> ADD .)
+    MOD             reduce using rule 5 (instrucao -> ADD .)
+    EXP             reduce using rule 5 (instrucao -> ADD .)
+    RETURN          reduce using rule 5 (instrucao -> ADD .)
+    PRINT           reduce using rule 5 (instrucao -> ADD .)
+    PRINT_NL        reduce using rule 5 (instrucao -> ADD .)
+    COMENTARIO      reduce using rule 5 (instrucao -> ADD .)
+    PUSH_INT        reduce using rule 5 (instrucao -> ADD .)
+    SET_ARG         reduce using rule 5 (instrucao -> ADD .)
+    JUMP            reduce using rule 5 (instrucao -> ADD .)
+    JEQ             reduce using rule 5 (instrucao -> ADD .)
+    JLT             reduce using rule 5 (instrucao -> ADD .)
+    PRINT_STR       reduce using rule 5 (instrucao -> ADD .)
+    PUSH_VAR        reduce using rule 5 (instrucao -> ADD .)
+    PUSH_ARG        reduce using rule 5 (instrucao -> ADD .)
+    STORE_VAR       reduce using rule 5 (instrucao -> ADD .)
+    STORE_ARG       reduce using rule 5 (instrucao -> ADD .)
+    CALL            reduce using rule 5 (instrucao -> ADD .)
+    LOCALS          reduce using rule 5 (instrucao -> ADD .)
+
+
+state 6
+
+    (6) instrucao -> SUB .
+
+    IDENTIFICADOR   reduce using rule 6 (instrucao -> SUB .)
+    $end            reduce using rule 6 (instrucao -> SUB .)
+    ADD             reduce using rule 6 (instrucao -> SUB .)
+    SUB             reduce using rule 6 (instrucao -> SUB .)
+    MULT            reduce using rule 6 (instrucao -> SUB .)
+    DIV             reduce using rule 6 (instrucao -> SUB .)
+    MOD             reduce using rule 6 (instrucao -> SUB .)
+    EXP             reduce using rule 6 (instrucao -> SUB .)
+    RETURN          reduce using rule 6 (instrucao -> SUB .)
+    PRINT           reduce using rule 6 (instrucao -> SUB .)
+    PRINT_NL        reduce using rule 6 (instrucao -> SUB .)
+    COMENTARIO      reduce using rule 6 (instrucao -> SUB .)
+    PUSH_INT        reduce using rule 6 (instrucao -> SUB .)
+    SET_ARG         reduce using rule 6 (instrucao -> SUB .)
+    JUMP            reduce using rule 6 (instrucao -> SUB .)
+    JEQ             reduce using rule 6 (instrucao -> SUB .)
+    JLT             reduce using rule 6 (instrucao -> SUB .)
+    PRINT_STR       reduce using rule 6 (instrucao -> SUB .)
+    PUSH_VAR        reduce using rule 6 (instrucao -> SUB .)
+    PUSH_ARG        reduce using rule 6 (instrucao -> SUB .)
+    STORE_VAR       reduce using rule 6 (instrucao -> SUB .)
+    STORE_ARG       reduce using rule 6 (instrucao -> SUB .)
+    CALL            reduce using rule 6 (instrucao -> SUB .)
+    LOCALS          reduce using rule 6 (instrucao -> SUB .)
+
+
+state 7
+
+    (7) instrucao -> MULT .
+
+    IDENTIFICADOR   reduce using rule 7 (instrucao -> MULT .)
+    $end            reduce using rule 7 (instrucao -> MULT .)
+    ADD             reduce using rule 7 (instrucao -> MULT .)
+    SUB             reduce using rule 7 (instrucao -> MULT .)
+    MULT            reduce using rule 7 (instrucao -> MULT .)
+    DIV             reduce using rule 7 (instrucao -> MULT .)
+    MOD             reduce using rule 7 (instrucao -> MULT .)
+    EXP             reduce using rule 7 (instrucao -> MULT .)
+    RETURN          reduce using rule 7 (instrucao -> MULT .)
+    PRINT           reduce using rule 7 (instrucao -> MULT .)
+    PRINT_NL        reduce using rule 7 (instrucao -> MULT .)
+    COMENTARIO      reduce using rule 7 (instrucao -> MULT .)
+    PUSH_INT        reduce using rule 7 (instrucao -> MULT .)
+    SET_ARG         reduce using rule 7 (instrucao -> MULT .)
+    JUMP            reduce using rule 7 (instrucao -> MULT .)
+    JEQ             reduce using rule 7 (instrucao -> MULT .)
+    JLT             reduce using rule 7 (instrucao -> MULT .)
+    PRINT_STR       reduce using rule 7 (instrucao -> MULT .)
+    PUSH_VAR        reduce using rule 7 (instrucao -> MULT .)
+    PUSH_ARG        reduce using rule 7 (instrucao -> MULT .)
+    STORE_VAR       reduce using rule 7 (instrucao -> MULT .)
+    STORE_ARG       reduce using rule 7 (instrucao -> MULT .)
+    CALL            reduce using rule 7 (instrucao -> MULT .)
+    LOCALS          reduce using rule 7 (instrucao -> MULT .)
+
+
+state 8
+
+    (8) instrucao -> DIV .
+
+    IDENTIFICADOR   reduce using rule 8 (instrucao -> DIV .)
+    $end            reduce using rule 8 (instrucao -> DIV .)
+    ADD             reduce using rule 8 (instrucao -> DIV .)
+    SUB             reduce using rule 8 (instrucao -> DIV .)
+    MULT            reduce using rule 8 (instrucao -> DIV .)
+    DIV             reduce using rule 8 (instrucao -> DIV .)
+    MOD             reduce using rule 8 (instrucao -> DIV .)
+    EXP             reduce using rule 8 (instrucao -> DIV .)
+    RETURN          reduce using rule 8 (instrucao -> DIV .)
+    PRINT           reduce using rule 8 (instrucao -> DIV .)
+    PRINT_NL        reduce using rule 8 (instrucao -> DIV .)
+    COMENTARIO      reduce using rule 8 (instrucao -> DIV .)
+    PUSH_INT        reduce using rule 8 (instrucao -> DIV .)
+    SET_ARG         reduce using rule 8 (instrucao -> DIV .)
+    JUMP            reduce using rule 8 (instrucao -> DIV .)
+    JEQ             reduce using rule 8 (instrucao -> DIV .)
+    JLT             reduce using rule 8 (instrucao -> DIV .)
+    PRINT_STR       reduce using rule 8 (instrucao -> DIV .)
+    PUSH_VAR        reduce using rule 8 (instrucao -> DIV .)
+    PUSH_ARG        reduce using rule 8 (instrucao -> DIV .)
+    STORE_VAR       reduce using rule 8 (instrucao -> DIV .)
+    STORE_ARG       reduce using rule 8 (instrucao -> DIV .)
+    CALL            reduce using rule 8 (instrucao -> DIV .)
+    LOCALS          reduce using rule 8 (instrucao -> DIV .)
+
+
+state 9
+
+    (9) instrucao -> MOD .
+
+    IDENTIFICADOR   reduce using rule 9 (instrucao -> MOD .)
+    $end            reduce using rule 9 (instrucao -> MOD .)
+    ADD             reduce using rule 9 (instrucao -> MOD .)
+    SUB             reduce using rule 9 (instrucao -> MOD .)
+    MULT            reduce using rule 9 (instrucao -> MOD .)
+    DIV             reduce using rule 9 (instrucao -> MOD .)
+    MOD             reduce using rule 9 (instrucao -> MOD .)
+    EXP             reduce using rule 9 (instrucao -> MOD .)
+    RETURN          reduce using rule 9 (instrucao -> MOD .)
+    PRINT           reduce using rule 9 (instrucao -> MOD .)
+    PRINT_NL        reduce using rule 9 (instrucao -> MOD .)
+    COMENTARIO      reduce using rule 9 (instrucao -> MOD .)
+    PUSH_INT        reduce using rule 9 (instrucao -> MOD .)
+    SET_ARG         reduce using rule 9 (instrucao -> MOD .)
+    JUMP            reduce using rule 9 (instrucao -> MOD .)
+    JEQ             reduce using rule 9 (instrucao -> MOD .)
+    JLT             reduce using rule 9 (instrucao -> MOD .)
+    PRINT_STR       reduce using rule 9 (instrucao -> MOD .)
+    PUSH_VAR        reduce using rule 9 (instrucao -> MOD .)
+    PUSH_ARG        reduce using rule 9 (instrucao -> MOD .)
+    STORE_VAR       reduce using rule 9 (instrucao -> MOD .)
+    STORE_ARG       reduce using rule 9 (instrucao -> MOD .)
+    CALL            reduce using rule 9 (instrucao -> MOD .)
+    LOCALS          reduce using rule 9 (instrucao -> MOD .)
+
+
+state 10
+
+    (10) instrucao -> EXP .
+
+    IDENTIFICADOR   reduce using rule 10 (instrucao -> EXP .)
+    $end            reduce using rule 10 (instrucao -> EXP .)
+    ADD             reduce using rule 10 (instrucao -> EXP .)
+    SUB             reduce using rule 10 (instrucao -> EXP .)
+    MULT            reduce using rule 10 (instrucao -> EXP .)
+    DIV             reduce using rule 10 (instrucao -> EXP .)
+    MOD             reduce using rule 10 (instrucao -> EXP .)
+    EXP             reduce using rule 10 (instrucao -> EXP .)
+    RETURN          reduce using rule 10 (instrucao -> EXP .)
+    PRINT           reduce using rule 10 (instrucao -> EXP .)
+    PRINT_NL        reduce using rule 10 (instrucao -> EXP .)
+    COMENTARIO      reduce using rule 10 (instrucao -> EXP .)
+    PUSH_INT        reduce using rule 10 (instrucao -> EXP .)
+    SET_ARG         reduce using rule 10 (instrucao -> EXP .)
+    JUMP            reduce using rule 10 (instrucao -> EXP .)
+    JEQ             reduce using rule 10 (instrucao -> EXP .)
+    JLT             reduce using rule 10 (instrucao -> EXP .)
+    PRINT_STR       reduce using rule 10 (instrucao -> EXP .)
+    PUSH_VAR        reduce using rule 10 (instrucao -> EXP .)
+    PUSH_ARG        reduce using rule 10 (instrucao -> EXP .)
+    STORE_VAR       reduce using rule 10 (instrucao -> EXP .)
+    STORE_ARG       reduce using rule 10 (instrucao -> EXP .)
+    CALL            reduce using rule 10 (instrucao -> EXP .)
+    LOCALS          reduce using rule 10 (instrucao -> EXP .)
+
+
+state 11
+
+    (11) instrucao -> RETURN .
+
+    IDENTIFICADOR   reduce using rule 11 (instrucao -> RETURN .)
+    $end            reduce using rule 11 (instrucao -> RETURN .)
+    ADD             reduce using rule 11 (instrucao -> RETURN .)
+    SUB             reduce using rule 11 (instrucao -> RETURN .)
+    MULT            reduce using rule 11 (instrucao -> RETURN .)
+    DIV             reduce using rule 11 (instrucao -> RETURN .)
+    MOD             reduce using rule 11 (instrucao -> RETURN .)
+    EXP             reduce using rule 11 (instrucao -> RETURN .)
+    RETURN          reduce using rule 11 (instrucao -> RETURN .)
+    PRINT           reduce using rule 11 (instrucao -> RETURN .)
+    PRINT_NL        reduce using rule 11 (instrucao -> RETURN .)
+    COMENTARIO      reduce using rule 11 (instrucao -> RETURN .)
+    PUSH_INT        reduce using rule 11 (instrucao -> RETURN .)
+    SET_ARG         reduce using rule 11 (instrucao -> RETURN .)
+    JUMP            reduce using rule 11 (instrucao -> RETURN .)
+    JEQ             reduce using rule 11 (instrucao -> RETURN .)
+    JLT             reduce using rule 11 (instrucao -> RETURN .)
+    PRINT_STR       reduce using rule 11 (instrucao -> RETURN .)
+    PUSH_VAR        reduce using rule 11 (instrucao -> RETURN .)
+    PUSH_ARG        reduce using rule 11 (instrucao -> RETURN .)
+    STORE_VAR       reduce using rule 11 (instrucao -> RETURN .)
+    STORE_ARG       reduce using rule 11 (instrucao -> RETURN .)
+    CALL            reduce using rule 11 (instrucao -> RETURN .)
+    LOCALS          reduce using rule 11 (instrucao -> RETURN .)
+
+
+state 12
+
+    (12) instrucao -> PRINT .
+
+    IDENTIFICADOR   reduce using rule 12 (instrucao -> PRINT .)
+    $end            reduce using rule 12 (instrucao -> PRINT .)
+    ADD             reduce using rule 12 (instrucao -> PRINT .)
+    SUB             reduce using rule 12 (instrucao -> PRINT .)
+    MULT            reduce using rule 12 (instrucao -> PRINT .)
+    DIV             reduce using rule 12 (instrucao -> PRINT .)
+    MOD             reduce using rule 12 (instrucao -> PRINT .)
+    EXP             reduce using rule 12 (instrucao -> PRINT .)
+    RETURN          reduce using rule 12 (instrucao -> PRINT .)
+    PRINT           reduce using rule 12 (instrucao -> PRINT .)
+    PRINT_NL        reduce using rule 12 (instrucao -> PRINT .)
+    COMENTARIO      reduce using rule 12 (instrucao -> PRINT .)
+    PUSH_INT        reduce using rule 12 (instrucao -> PRINT .)
+    SET_ARG         reduce using rule 12 (instrucao -> PRINT .)
+    JUMP            reduce using rule 12 (instrucao -> PRINT .)
+    JEQ             reduce using rule 12 (instrucao -> PRINT .)
+    JLT             reduce using rule 12 (instrucao -> PRINT .)
+    PRINT_STR       reduce using rule 12 (instrucao -> PRINT .)
+    PUSH_VAR        reduce using rule 12 (instrucao -> PRINT .)
+    PUSH_ARG        reduce using rule 12 (instrucao -> PRINT .)
+    STORE_VAR       reduce using rule 12 (instrucao -> PRINT .)
+    STORE_ARG       reduce using rule 12 (instrucao -> PRINT .)
+    CALL            reduce using rule 12 (instrucao -> PRINT .)
+    LOCALS          reduce using rule 12 (instrucao -> PRINT .)
+
+
+state 13
+
+    (13) instrucao -> PRINT_NL .
+
+    IDENTIFICADOR   reduce using rule 13 (instrucao -> PRINT_NL .)
+    $end            reduce using rule 13 (instrucao -> PRINT_NL .)
+    ADD             reduce using rule 13 (instrucao -> PRINT_NL .)
+    SUB             reduce using rule 13 (instrucao -> PRINT_NL .)
+    MULT            reduce using rule 13 (instrucao -> PRINT_NL .)
+    DIV             reduce using rule 13 (instrucao -> PRINT_NL .)
+    MOD             reduce using rule 13 (instrucao -> PRINT_NL .)
+    EXP             reduce using rule 13 (instrucao -> PRINT_NL .)
+    RETURN          reduce using rule 13 (instrucao -> PRINT_NL .)
+    PRINT           reduce using rule 13 (instrucao -> PRINT_NL .)
+    PRINT_NL        reduce using rule 13 (instrucao -> PRINT_NL .)
+    COMENTARIO      reduce using rule 13 (instrucao -> PRINT_NL .)
+    PUSH_INT        reduce using rule 13 (instrucao -> PRINT_NL .)
+    SET_ARG         reduce using rule 13 (instrucao -> PRINT_NL .)
+    JUMP            reduce using rule 13 (instrucao -> PRINT_NL .)
+    JEQ             reduce using rule 13 (instrucao -> PRINT_NL .)
+    JLT             reduce using rule 13 (instrucao -> PRINT_NL .)
+    PRINT_STR       reduce using rule 13 (instrucao -> PRINT_NL .)
+    PUSH_VAR        reduce using rule 13 (instrucao -> PRINT_NL .)
+    PUSH_ARG        reduce using rule 13 (instrucao -> PRINT_NL .)
+    STORE_VAR       reduce using rule 13 (instrucao -> PRINT_NL .)
+    STORE_ARG       reduce using rule 13 (instrucao -> PRINT_NL .)
+    CALL            reduce using rule 13 (instrucao -> PRINT_NL .)
+    LOCALS          reduce using rule 13 (instrucao -> PRINT_NL .)
+
+
+state 14
+
+    (14) instrucao -> COMENTARIO .
+
+    IDENTIFICADOR   reduce using rule 14 (instrucao -> COMENTARIO .)
+    $end            reduce using rule 14 (instrucao -> COMENTARIO .)
+    ADD             reduce using rule 14 (instrucao -> COMENTARIO .)
+    SUB             reduce using rule 14 (instrucao -> COMENTARIO .)
+    MULT            reduce using rule 14 (instrucao -> COMENTARIO .)
+    DIV             reduce using rule 14 (instrucao -> COMENTARIO .)
+    MOD             reduce using rule 14 (instrucao -> COMENTARIO .)
+    EXP             reduce using rule 14 (instrucao -> COMENTARIO .)
+    RETURN          reduce using rule 14 (instrucao -> COMENTARIO .)
+    PRINT           reduce using rule 14 (instrucao -> COMENTARIO .)
+    PRINT_NL        reduce using rule 14 (instrucao -> COMENTARIO .)
+    COMENTARIO      reduce using rule 14 (instrucao -> COMENTARIO .)
+    PUSH_INT        reduce using rule 14 (instrucao -> COMENTARIO .)
+    SET_ARG         reduce using rule 14 (instrucao -> COMENTARIO .)
+    JUMP            reduce using rule 14 (instrucao -> COMENTARIO .)
+    JEQ             reduce using rule 14 (instrucao -> COMENTARIO .)
+    JLT             reduce using rule 14 (instrucao -> COMENTARIO .)
+    PRINT_STR       reduce using rule 14 (instrucao -> COMENTARIO .)
+    PUSH_VAR        reduce using rule 14 (instrucao -> COMENTARIO .)
+    PUSH_ARG        reduce using rule 14 (instrucao -> COMENTARIO .)
+    STORE_VAR       reduce using rule 14 (instrucao -> COMENTARIO .)
+    STORE_ARG       reduce using rule 14 (instrucao -> COMENTARIO .)
+    CALL            reduce using rule 14 (instrucao -> COMENTARIO .)
+    LOCALS          reduce using rule 14 (instrucao -> COMENTARIO .)
+
+
+state 15
+
+    (15) instrucao -> PUSH_INT . INTEIRO
+
+    INTEIRO         shift and go to state 28
+
+
+state 16
+
+    (16) instrucao -> SET_ARG . INTEIRO
+
+    INTEIRO         shift and go to state 29
+
+
+state 17
+
+    (17) instrucao -> JUMP . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 30
+
+
+state 18
+
+    (18) instrucao -> JEQ . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 31
+
+
+state 19
+
+    (19) instrucao -> JLT . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 32
+
+
+state 20
+
+    (20) instrucao -> PRINT_STR . STRING
+
+    STRING          shift and go to state 33
+
+
+state 21
+
+    (21) instrucao -> PUSH_VAR . INTEIRO INTEIRO
+
+    INTEIRO         shift and go to state 34
+
+
+state 22
+
+    (22) instrucao -> PUSH_ARG . INTEIRO INTEIRO
+
+    INTEIRO         shift and go to state 35
+
+
+state 23
+
+    (23) instrucao -> STORE_VAR . INTEIRO INTEIRO
+
+    INTEIRO         shift and go to state 36
+
+
+state 24
+
+    (24) instrucao -> STORE_ARG . INTEIRO INTEIRO
+
+    INTEIRO         shift and go to state 37
+
+
+state 25
+
+    (25) instrucao -> CALL . INTEIRO IDENTIFICADOR
+
+    INTEIRO         shift and go to state 38
+
+
+state 26
+
+    (26) instrucao -> LOCALS . INTEIRO INTEIRO
+
+    INTEIRO         shift and go to state 39
+
+
+state 27
+
+    (3) etiqueta -> IDENTIFICADOR DOIS_PONTOS .
+
+    ADD             reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    SUB             reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    MULT            reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    DIV             reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    MOD             reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    EXP             reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    RETURN          reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    PRINT           reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    PRINT_NL        reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    COMENTARIO      reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    PUSH_INT        reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    SET_ARG         reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    JUMP            reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    JEQ             reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    JLT             reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    PRINT_STR       reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    PUSH_VAR        reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    PUSH_ARG        reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    STORE_VAR       reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    STORE_ARG       reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    CALL            reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+    LOCALS          reduce using rule 3 (etiqueta -> IDENTIFICADOR DOIS_PONTOS .)
+
+
+state 28
+
+    (15) instrucao -> PUSH_INT INTEIRO .
+
+    IDENTIFICADOR   reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    $end            reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    ADD             reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    SUB             reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    MULT            reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    DIV             reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    MOD             reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    EXP             reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    RETURN          reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    PRINT           reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    PRINT_NL        reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    COMENTARIO      reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    PUSH_INT        reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    SET_ARG         reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    JUMP            reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    JEQ             reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    JLT             reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    PRINT_STR       reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    PUSH_VAR        reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    PUSH_ARG        reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    STORE_VAR       reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    STORE_ARG       reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    CALL            reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+    LOCALS          reduce using rule 15 (instrucao -> PUSH_INT INTEIRO .)
+
+
+state 29
+
+    (16) instrucao -> SET_ARG INTEIRO .
+
+    IDENTIFICADOR   reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    $end            reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    ADD             reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    SUB             reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    MULT            reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    DIV             reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    MOD             reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    EXP             reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    RETURN          reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    PRINT           reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    PRINT_NL        reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    COMENTARIO      reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    PUSH_INT        reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    SET_ARG         reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    JUMP            reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    JEQ             reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    JLT             reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    PRINT_STR       reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    PUSH_VAR        reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    PUSH_ARG        reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    STORE_VAR       reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    STORE_ARG       reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    CALL            reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+    LOCALS          reduce using rule 16 (instrucao -> SET_ARG INTEIRO .)
+
+
+state 30
+
+    (17) instrucao -> JUMP IDENTIFICADOR .
+
+    IDENTIFICADOR   reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    $end            reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    ADD             reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    SUB             reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    MULT            reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    DIV             reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    MOD             reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    EXP             reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    RETURN          reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    PRINT           reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    PRINT_NL        reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    COMENTARIO      reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    PUSH_INT        reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    SET_ARG         reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    JUMP            reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    JEQ             reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    JLT             reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    PRINT_STR       reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    PUSH_VAR        reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    PUSH_ARG        reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    STORE_VAR       reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    STORE_ARG       reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    CALL            reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+    LOCALS          reduce using rule 17 (instrucao -> JUMP IDENTIFICADOR .)
+
+
+state 31
+
+    (18) instrucao -> JEQ IDENTIFICADOR .
+
+    IDENTIFICADOR   reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    $end            reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    ADD             reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    SUB             reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    MULT            reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    DIV             reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    MOD             reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    EXP             reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    RETURN          reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    PRINT           reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    PRINT_NL        reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    COMENTARIO      reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    PUSH_INT        reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    SET_ARG         reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    JUMP            reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    JEQ             reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    JLT             reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    PRINT_STR       reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    PUSH_VAR        reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    PUSH_ARG        reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    STORE_VAR       reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    STORE_ARG       reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    CALL            reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+    LOCALS          reduce using rule 18 (instrucao -> JEQ IDENTIFICADOR .)
+
+
+state 32
+
+    (19) instrucao -> JLT IDENTIFICADOR .
+
+    IDENTIFICADOR   reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    $end            reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    ADD             reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    SUB             reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    MULT            reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    DIV             reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    MOD             reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    EXP             reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    RETURN          reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    PRINT           reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    PRINT_NL        reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    COMENTARIO      reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    PUSH_INT        reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    SET_ARG         reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    JUMP            reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    JEQ             reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    JLT             reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    PRINT_STR       reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    PUSH_VAR        reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    PUSH_ARG        reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    STORE_VAR       reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    STORE_ARG       reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    CALL            reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+    LOCALS          reduce using rule 19 (instrucao -> JLT IDENTIFICADOR .)
+
+
+state 33
+
+    (20) instrucao -> PRINT_STR STRING .
+
+    IDENTIFICADOR   reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    $end            reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    ADD             reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    SUB             reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    MULT            reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    DIV             reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    MOD             reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    EXP             reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    RETURN          reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    PRINT           reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    PRINT_NL        reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    COMENTARIO      reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    PUSH_INT        reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    SET_ARG         reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    JUMP            reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    JEQ             reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    JLT             reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    PRINT_STR       reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    PUSH_VAR        reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    PUSH_ARG        reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    STORE_VAR       reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    STORE_ARG       reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    CALL            reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+    LOCALS          reduce using rule 20 (instrucao -> PRINT_STR STRING .)
+
+
+state 34
+
+    (21) instrucao -> PUSH_VAR INTEIRO . INTEIRO
+
+    INTEIRO         shift and go to state 40
+
+
+state 35
+
+    (22) instrucao -> PUSH_ARG INTEIRO . INTEIRO
+
+    INTEIRO         shift and go to state 41
+
+
+state 36
+
+    (23) instrucao -> STORE_VAR INTEIRO . INTEIRO
+
+    INTEIRO         shift and go to state 42
+
+
+state 37
+
+    (24) instrucao -> STORE_ARG INTEIRO . INTEIRO
+
+    INTEIRO         shift and go to state 43
+
+
+state 38
+
+    (25) instrucao -> CALL INTEIRO . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 44
+
+
+state 39
+
+    (26) instrucao -> LOCALS INTEIRO . INTEIRO
+
+    INTEIRO         shift and go to state 45
+
+
+state 40
+
+    (21) instrucao -> PUSH_VAR INTEIRO INTEIRO .
+
+    IDENTIFICADOR   reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    $end            reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    ADD             reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    SUB             reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    MULT            reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    DIV             reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    MOD             reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    EXP             reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    RETURN          reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    PRINT           reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    PRINT_NL        reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    COMENTARIO      reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    PUSH_INT        reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    SET_ARG         reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    JUMP            reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    JEQ             reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    JLT             reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    PRINT_STR       reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    PUSH_VAR        reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    PUSH_ARG        reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    STORE_VAR       reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    STORE_ARG       reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    CALL            reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+    LOCALS          reduce using rule 21 (instrucao -> PUSH_VAR INTEIRO INTEIRO .)
+
+
+state 41
+
+    (22) instrucao -> PUSH_ARG INTEIRO INTEIRO .
+
+    IDENTIFICADOR   reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    $end            reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    ADD             reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    SUB             reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    MULT            reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    DIV             reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    MOD             reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    EXP             reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    RETURN          reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    PRINT           reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    PRINT_NL        reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    COMENTARIO      reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    PUSH_INT        reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    SET_ARG         reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    JUMP            reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    JEQ             reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    JLT             reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    PRINT_STR       reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    PUSH_VAR        reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    PUSH_ARG        reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    STORE_VAR       reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    STORE_ARG       reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    CALL            reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+    LOCALS          reduce using rule 22 (instrucao -> PUSH_ARG INTEIRO INTEIRO .)
+
+
+state 42
+
+    (23) instrucao -> STORE_VAR INTEIRO INTEIRO .
+
+    IDENTIFICADOR   reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    $end            reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    ADD             reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    SUB             reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    MULT            reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    DIV             reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    MOD             reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    EXP             reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    RETURN          reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    PRINT           reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    PRINT_NL        reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    COMENTARIO      reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    PUSH_INT        reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    SET_ARG         reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    JUMP            reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    JEQ             reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    JLT             reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    PRINT_STR       reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    PUSH_VAR        reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    PUSH_ARG        reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    STORE_VAR       reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    STORE_ARG       reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    CALL            reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+    LOCALS          reduce using rule 23 (instrucao -> STORE_VAR INTEIRO INTEIRO .)
+
+
+state 43
+
+    (24) instrucao -> STORE_ARG INTEIRO INTEIRO .
+
+    IDENTIFICADOR   reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    $end            reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    ADD             reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    SUB             reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    MULT            reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    DIV             reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    MOD             reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    EXP             reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    RETURN          reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    PRINT           reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    PRINT_NL        reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    COMENTARIO      reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    PUSH_INT        reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    SET_ARG         reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    JUMP            reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    JEQ             reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    JLT             reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    PRINT_STR       reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    PUSH_VAR        reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    PUSH_ARG        reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    STORE_VAR       reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    STORE_ARG       reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    CALL            reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+    LOCALS          reduce using rule 24 (instrucao -> STORE_ARG INTEIRO INTEIRO .)
+
+
+state 44
+
+    (25) instrucao -> CALL INTEIRO IDENTIFICADOR .
+
+    IDENTIFICADOR   reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    $end            reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    ADD             reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    SUB             reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    MULT            reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    DIV             reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    MOD             reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    EXP             reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    RETURN          reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    PRINT           reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    PRINT_NL        reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    COMENTARIO      reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    PUSH_INT        reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    SET_ARG         reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    JUMP            reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    JEQ             reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    JLT             reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    PRINT_STR       reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    PUSH_VAR        reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    PUSH_ARG        reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    STORE_VAR       reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    STORE_ARG       reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    CALL            reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+    LOCALS          reduce using rule 25 (instrucao -> CALL INTEIRO IDENTIFICADOR .)
+
+
+state 45
+
+    (26) instrucao -> LOCALS INTEIRO INTEIRO .
+
+    IDENTIFICADOR   reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    $end            reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    ADD             reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    SUB             reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    MULT            reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    DIV             reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    MOD             reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    EXP             reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    RETURN          reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    PRINT           reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    PRINT_NL        reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    COMENTARIO      reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    PUSH_INT        reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    SET_ARG         reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    JUMP            reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    JEQ             reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    JLT             reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    PRINT_STR       reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    PUSH_VAR        reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    PUSH_ARG        reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    STORE_VAR       reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    STORE_ARG       reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    CALL            reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+    LOCALS          reduce using rule 26 (instrucao -> LOCALS INTEIRO INTEIRO .)
+

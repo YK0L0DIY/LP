@@ -1,0 +1,25 @@
+class TISC:
+    pc = 0
+    sp = 0
+
+    vars = []
+    instructions = []
+
+    def new_instruction(self, label='', name='', arg1=None, arg2=None):
+        self.instructions.append(Instruction(label=label,
+                                             name=name,
+                                             arg1=arg1,
+                                             arg2=arg2))
+
+
+class Instruction:
+
+    def __init__(self,type='', label='', name='', arg1=None, arg2=None):
+        self.label = label
+        self.name = name
+        self.arg1 = arg1
+        self.arg2 = arg2
+        print(f'{self.label},{self.name},{self.arg1},{self.arg2}')
+
+    def __repr__(self):
+        return f'{self.label},{self.name},{self.arg1},{self.arg2}'

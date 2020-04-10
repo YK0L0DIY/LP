@@ -1,4 +1,7 @@
 import ply.lex as lex
+import ply.yacc as yacc
+
+from trabalho.ficheiros.TISC import TISC, Instruction
 
 # List of token names.   This is always required
 tokens = (
@@ -135,11 +138,80 @@ L2:	push_var 0 2
 '''
 
 # Give the lexer some input
-lexer.input(data)
+# lexer.input(data)
 
 # Tokenize
-while True:
-    tok = lexer.token()
-    if not tok:
-        break  # No more input
-    print(tok)
+# while True:
+#    tok = lexer.token()
+#    if not tok:
+#        break  # No more input
+#    print(tok)
+
+
+tisc = TISC
+
+
+def p_programa(t):
+    'programa : programa etiqueta instrucao '
+
+    t[0] = Instruction(label=t[2])
+
+
+def p_prgram_empty(t):
+    'programa : '
+    pass
+
+
+def p_etiqueta(p):
+    '''etiqueta : IDENTIFICADOR DOIS_PONTOS'''
+
+    p[0] = Instruction(label=p[1])
+
+
+def p_etiqueta_empty(p):
+    '''etiqueta : '''
+    pass
+
+
+def p_instrucao(p):
+    '''instrucao :  ADD
+                |   SUB
+                |   MULT
+                |   DIV
+                |   MOD
+                |   EXP
+                |   RETURN
+                |   PRINT
+                |   PRINT_NL
+                |   COMENTARIO'''
+
+    p[0] = Instruction(name=p[1])
+
+
+def p_instrucao_arg1(p):
+    '''instrucao :  PUSH_INT INTEIRO
+                |   SET_ARG INTEIRO
+                |   JUMP IDENTIFICADOR
+	            |   JEQ IDENTIFICADOR
+	            |   JLT IDENTIFICADOR
+	            |   PRINT_STR STRING'''
+
+    p[0] = Instruction(name=p[1], arg1=p[2])
+
+
+def p_instrucao_arg2(p):
+    '''instrucao : PUSH_VAR INTEIRO INTEIRO
+              |   PUSH_ARG INTEIRO INTEIRO
+              |   STORE_VAR INTEIRO INTEIRO
+              |   STORE_ARG INTEIRO INTEIRO
+              |   CALL INTEIRO IDENTIFICADOR
+              |   LOCALS INTEIRO INTEIRO'''
+
+    p[0] = Instruction(name=p[1], arg1=p[2], arg2=p[3])
+
+
+parser = yacc.yacc()
+
+print(parser.parse(data))
+
+print(tisc)
