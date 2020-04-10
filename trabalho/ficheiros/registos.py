@@ -37,7 +37,6 @@ tokens = (
     'STRING',
 
     'ERRO',
-    'BRANCOS',
     'COMENTARIO',
 )
 
@@ -92,11 +91,12 @@ def t_STRING(t):
 
 # Error handling rule
 def t_error(t):
+    r'.'
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
 
-t_BRANCOS = r'[\ \n\t]'
+t_ignore = '[ \n\t]'
 t_COMENTARIO = r'\#.*'
 
 # Build the lexer
