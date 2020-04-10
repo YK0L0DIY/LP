@@ -43,32 +43,64 @@ tokens = (
     'COMENTARIO',
 )
 
-t_ADD = r'add'
-t_SUB = r'sub'
-t_MULT = r'mult'
-t_DIV = r'div'
-t_MOD = r'mod'
-t_EXP = r'exp'
+t_ADD = 'add'
+t_SUB = 'sub'
+t_MULT = 'mult'
+t_DIV = 'div'
+t_MOD = 'mod'
+t_EXP = 'exp'
 
-t_PUSH_INT = r'push_int'
-t_PUSH_VAR = r'push_var'
-t_PUSH_ARG = r'push_arg'
+t_PUSH_INT = 'push_int'
+t_PUSH_VAR = 'push_var'
+t_PUSH_ARG = 'push_arg'
 
-t_STORE_VAR = r'store_var'
-t_STORE_ARG = r'store_arg'
+t_STORE_VAR = 'store_var'
+t_STORE_ARG = 'store_arg'
 
-t_SET_ARG = r'set_arg'
-t_CALL = r'call'
-t_LOCALS = r'locals'
-t_RETURN = r'return'
+t_SET_ARG = 'set_arg'
+t_CALL = 'call'
 
-t_JUMP = r'jump'
-t_JEQ = r'jeq'
-t_JLT = r'jlt'
 
-t_PRINT = r'print'
-t_PRINT_STR = r'print_str'
-t_PRINT_NL = r'print_nl'
+def t_LOCALS(t):
+    'locals'
+    t.value = 'locals'
+    return t
+
+
+t_RETURN = 'return'
+
+t_JUMP = 'jump'
+t_JEQ = 'jeq'
+
+
+def t_JLT(t):
+    'jlt'
+    t.value = 'jlt'
+    return t
+
+
+def t_PRINT_NL(t):
+    'print_nl'
+    t.value = 'print_nl'
+    return t
+
+
+def t_PRINT_STR(t):
+    r'print_str'
+    t.value = 'print_str'
+    return t
+
+
+def t_PRINT(t):
+    r'print'
+    t.value = 'print'
+    return t
+
+
+def t_STRING(t):
+    r'\"(\\[\\\"]|[^\"\\])*\"'
+    t.value = str(t.value)
+    return t
 
 
 def t_IDENTIFICADOR(t):
@@ -83,12 +115,6 @@ t_DOIS_PONTOS = r':'
 def t_INTEIRO(t):
     r'-?[0-9]+'
     t.value = int(t.value)
-    return t
-
-
-def t_STRING(t):
-    r'\"(\\[\\\"]|[^\"\\])*\"'
-    t.value = str(t.value)
     return t
 
 
@@ -138,15 +164,14 @@ L2:	push_var 0 2
 '''
 
 # Give the lexer some input
-# lexer.input(data)
+lexer.input(data)
 
 # Tokenize
-# while True:
-#    tok = lexer.token()
-#    if not tok:
-#        break  # No more input
-#    print(tok)
-
+while True:
+    tok = lexer.token()
+    if not tok:
+        break  # No more input
+    print(tok)
 
 tisc = TISC
 
@@ -175,15 +200,15 @@ def p_etiqueta_empty(p):
 
 def p_instrucao(p):
     '''instrucao :  ADD
-                |   SUB
-                |   MULT
-                |   DIV
-                |   MOD
-                |   EXP
-                |   RETURN
-                |   PRINT
-                |   PRINT_NL
-                |   COMENTARIO'''
+        instrucao : SUB
+        instrucao : MULT
+        instrucao : DIV
+        instrucao : MOD
+        instrucao : EXP
+        instrucao : RETURN
+        instrucao : PRINT
+        instrucao : PRINT_NL
+        instrucao : COMENTARIO'''
 
     p[0] = Instruction(name=p[1])
 
@@ -213,5 +238,3 @@ def p_instrucao_arg2(p):
 parser = yacc.yacc()
 
 print(parser.parse(data))
-
-print(tisc)
