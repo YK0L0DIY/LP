@@ -43,22 +43,83 @@ tokens = (
     'COMENTARIO',
 )
 
-t_ADD = 'add'
-t_SUB = 'sub'
-t_MULT = 'mult'
-t_DIV = 'div'
-t_MOD = 'mod'
-t_EXP = 'exp'
 
-t_PUSH_INT = 'push_int'
-t_PUSH_VAR = 'push_var'
-t_PUSH_ARG = 'push_arg'
+def t_ADD(t):
+    'add'
+    t.value = 'add'
+    return t
 
-t_STORE_VAR = 'store_var'
-t_STORE_ARG = 'store_arg'
 
-t_SET_ARG = 'set_arg'
-t_CALL = 'call'
+def t_SUB(t):
+    'sub'
+    t.value = 'sub'
+    return t
+
+
+def t_MULT(t):
+    'mult'
+    t.value = 'mult'
+    return t
+
+
+def t_DIV(t):
+    'div'
+    t.value = 'div'
+    return t
+
+
+def t_MOD(t):
+    'mod'
+    t.value = 'mod'
+    return t
+
+
+def t_EXP(t):
+    'exp'
+    t.value = 'exp'
+    return t
+
+
+def t_PUSH_INT(t):
+    'push_int'
+    t.value = 'push_int'
+    return t
+
+
+def t_PUSH_VAR(t):
+    'push_var'
+    t.value = 'push_var'
+    return t
+
+
+def t_PUSH_ARG(t):
+    'push_arg'
+    t.value = 'push_arg'
+    return t
+
+
+def t_STORE_VAR(t):
+    'store_var'
+    t.value = 'store_var'
+    return t
+
+
+def t_STORE_ARG(t):
+    'store_arg'
+    t.value = 'store_arg'
+    return t
+
+
+def t_SET_ARG(t):
+    'set_arg'
+    t.value = 'set_arg'
+    return t
+
+
+def t_CALL(t):
+    'call'
+    t.value = 'call'
+    return t
 
 
 def t_LOCALS(t):
@@ -67,10 +128,22 @@ def t_LOCALS(t):
     return t
 
 
-t_RETURN = 'return'
+def t_RETURN(t):
+    'return'
+    t.value = 'return'
+    return t
 
-t_JUMP = 'jump'
-t_JEQ = 'jeq'
+
+def t_JUMP(t):
+    'jump'
+    t.value = 'jump'
+    return t
+
+
+def t_JEQ(t):
+    'jeq'
+    t.value = 'jeq'
+    return 'jeq'
 
 
 def t_JLT(t):
@@ -126,7 +199,13 @@ def t_error(t):
 
 
 t_ignore = '[ \n\t]'
-t_COMENTARIO = r'\#.*'
+
+
+# ignoarar os comentarios
+def t_COMENTARIO(t):
+    r'\#.*'
+    return
+
 
 # Build the lexer
 lexer = lex.lex()
@@ -164,22 +243,23 @@ L2:	push_var 0 2
 '''
 
 # Give the lexer some input
-lexer.input(data)
+# lexer.input(data)
 
 # Tokenize
-while True:
-    tok = lexer.token()
-    if not tok:
-        break  # No more input
-    print(tok)
+# while True:
+#    tok = lexer.token()
+#    if not tok:
+#        break  # No more input
+#    print(tok)
 
 tisc = TISC
 
 
+# para verificar linha a linha
 def p_programa(t):
     'programa : programa etiqueta instrucao '
-
-    t[0] = Instruction(label=t[2])
+    pass
+    # t[0] = Instruction(label=t[2])
 
 
 def p_prgram_empty(t):
@@ -187,6 +267,7 @@ def p_prgram_empty(t):
     pass
 
 
+# criar uma lable para os jumps e funcoes
 def p_etiqueta(p):
     '''etiqueta : IDENTIFICADOR DOIS_PONTOS'''
 
@@ -200,15 +281,15 @@ def p_etiqueta_empty(p):
 
 def p_instrucao(p):
     '''instrucao :  ADD
-        instrucao : SUB
-        instrucao : MULT
-        instrucao : DIV
-        instrucao : MOD
-        instrucao : EXP
-        instrucao : RETURN
-        instrucao : PRINT
-        instrucao : PRINT_NL
-        instrucao : COMENTARIO'''
+                |   SUB
+                |   MULT
+                |   DIV
+                |   MOD
+                |   EXP
+                |   RETURN
+                |   PRINT
+                |   PRINT_NL
+                |   COMENTARIO'''
 
     p[0] = Instruction(name=p[1])
 
@@ -233,6 +314,10 @@ def p_instrucao_arg2(p):
               |   LOCALS INTEIRO INTEIRO'''
 
     p[0] = Instruction(name=p[1], arg1=p[2], arg2=p[3])
+
+
+def p_error():
+    print('Syntax error')
 
 
 parser = yacc.yacc()
