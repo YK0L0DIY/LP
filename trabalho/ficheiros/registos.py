@@ -1,7 +1,7 @@
 import ply.lex as lex
 import ply.yacc as yacc
 
-from trabalho.ficheiros.TISC import TISC, Instruction
+from LP.trabalho.ficheiros.TISC import TISC, Instruction
 
 # List of token names.   This is always required
 tokens = (
@@ -252,7 +252,7 @@ L2:	push_var 0 2
 #        break  # No more input
 #    print(tok)
 
-tisc = TISC
+tisc = TISC()
 
 
 # para verificar linha a linha
@@ -272,6 +272,7 @@ def p_etiqueta(p):
     '''etiqueta : IDENTIFICADOR DOIS_PONTOS'''
 
     p[0] = Instruction(label=p[1])
+    tisc.new_instruction(p[0])
 
 
 def p_etiqueta_empty(p):
@@ -292,6 +293,7 @@ def p_instrucao(p):
                 |   COMENTARIO'''
 
     p[0] = Instruction(name=p[1])
+    tisc.new_instruction(p[0])
 
 
 def p_instrucao_arg1(p):
@@ -303,6 +305,7 @@ def p_instrucao_arg1(p):
 	            |   PRINT_STR STRING'''
 
     p[0] = Instruction(name=p[1], arg1=p[2])
+    tisc.new_instruction(p[0])
 
 
 def p_instrucao_arg2(p):
@@ -314,12 +317,14 @@ def p_instrucao_arg2(p):
               |   LOCALS INTEIRO INTEIRO'''
 
     p[0] = Instruction(name=p[1], arg1=p[2], arg2=p[3])
+    tisc.new_instruction(p[0])
 
 
-def p_error():
+def p_error(p):
     print('Syntax error')
-
 
 parser = yacc.yacc()
 
-print(parser.parse(data))
+parser.parse(data)
+for i in range(0, len(tisc.instructions)):
+    print(tisc.instructions[i])
