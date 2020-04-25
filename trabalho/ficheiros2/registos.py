@@ -1,7 +1,8 @@
 import ply.lex as lex
 import ply.yacc as yacc
-
-from LP.trabalho.ficheiros.TISC import TISC, Instruction
+#import pprint
+import json
+from LP.trabalho.ficheiros2.TISC import TISC, Instruction
 
 # List of token names.   This is always required
 tokens = (
@@ -229,7 +230,7 @@ def p_etiqueta(p):
     '''etiqueta : IDENTIFICADOR DOIS_PONTOS'''
 
     p[0] = Instruction(label=p[1])
-    tisc.new_instruction(p[0])
+    tisc.execute(p[0])
 
 
 def p_etiqueta_empty(p):
@@ -250,7 +251,7 @@ def p_instrucao(p):
                 |   COMENTARIO'''
 
     p[0] = Instruction(name=p[1])
-    tisc.new_instruction(p[0])
+    tisc.execute(p[0])
 
 
 def p_instrucao_arg1(p):
@@ -262,7 +263,7 @@ def p_instrucao_arg1(p):
 	            |   PRINT_STR STRING'''
 
     p[0] = Instruction(name=p[1], arg1=p[2])
-    tisc.new_instruction(p[0])
+    tisc.execute(p[0])
 
 
 def p_instrucao_arg2(p):
@@ -274,7 +275,7 @@ def p_instrucao_arg2(p):
               |   LOCALS INTEIRO INTEIRO'''
 
     p[0] = Instruction(name=p[1], arg1=p[2], arg2=p[3])
-    tisc.new_instruction(p[0])
+    tisc.execute(p[0])
 
 
 def p_error(p):
@@ -288,10 +289,10 @@ def main():
     with open(filepath) as fp:
         for line in fp:
             parser.parse(line)
-            #print(parser.symstack)
-
-    for i in range(0, len(tisc.instructions)):
-        print(tisc.instructions[i])
+    for block, instr in tisc.instructions.items():
+        print(block)
+        for inst in instr.items():
+            print(inst[1])
 
 if __name__ == '__main__':
     main()

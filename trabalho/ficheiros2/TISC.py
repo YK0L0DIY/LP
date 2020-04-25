@@ -5,12 +5,20 @@ class TISC:
     sp = 0
 
     vars = []
-    instructions = []
+    instructions = dict()
     avaliation_stack = deque()
 
+    block = ''
+    i = 0
+
     def execute(self, Instruction):
-        self.instructions.append(Instruction)
-        Instruction.execute()
+        if Instruction.label != None:
+            self.block = Instruction.label
+            self.instructions[self.block] = dict()
+            self.i = 1
+        else:
+            self.instructions[self.block][self.i] = Instruction.get_instruction()
+            self.i = self.i + 1
 
 
 class Instruction(object):
@@ -27,6 +35,12 @@ class Instruction(object):
 
     def execute(self):
         return ''
+
+    def get_label(self):
+        return self.label
+
+    def get_instruction(self):
+        return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
 
 class add(Instruction):
 
