@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class TISC:
     pc = 0
     sp = 0
@@ -28,10 +29,6 @@ class Instruction(object):
         self.name = name
         self.arg1 = arg1
         self.arg2 = arg2
-        #print(f'lable:{self.label},name:{self.name},arg1:{self.arg1},arg2:{self.arg2}')
-
-    #def __repr__(self):
-    #    return f'{self.label},{self.name},{self.arg1},{self.arg2}'
 
     def execute(self):
         return ''
@@ -41,6 +38,7 @@ class Instruction(object):
 
     def get_instruction(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
+
 
 class add(Instruction):
 
@@ -56,6 +54,7 @@ class add(Instruction):
         res = arg2 + arg1
         av_stack.append(res)
 
+
 class sub(Instruction):
 
     def __init__(self, label=None, name='sub'):
@@ -69,6 +68,7 @@ class sub(Instruction):
         arg2 = av_stack.pop()
         res = arg2 - arg1
         av_stack.append(res)
+
 
 class mult(Instruction):
 
@@ -84,6 +84,7 @@ class mult(Instruction):
         res = arg2 * arg1
         av_stack.append(res)
 
+
 class div(Instruction):
 
     def __init__(self, label=None, name='div'):
@@ -97,6 +98,7 @@ class div(Instruction):
         arg2 = av_stack.pop()
         res = arg2 / arg1
         av_stack.append(res)
+
 
 class mod(Instruction):
 
@@ -112,6 +114,7 @@ class mod(Instruction):
         res = arg2 % arg1
         av_stack.append(res)
 
+
 class exp(Instruction):
 
     def __init__(self, label=None, name='exp'):
@@ -126,6 +129,7 @@ class exp(Instruction):
         res = arg2 ** arg1
         av_stack.append(res)
 
+
 class push_int(Instruction):
 
     def __init__(self, label=None, name='push_int', arg1=None):
@@ -138,9 +142,10 @@ class push_int(Instruction):
         av_stack = TISC.avaliation_stack
         av_stack.append(self.arg1)
 
+
 class push_var(Instruction):
 
-    def __init__(self, label = None, name = 'push_var', arg1 = None, arg2 = None):
+    def __init__(self, label=None, name='push_var', arg1=None, arg2=None):
         self.label = label
         self.name = name
         self.arg1 = arg1
