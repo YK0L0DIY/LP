@@ -6,26 +6,39 @@ class TISC:
     sp = 0
 
     vars = []
-    instructions = dict()
+    lables = {}
+    instructions = []
     avaliation_stack = deque()
+    number_instructions = 0
 
     block = ''
     i = 0
 
+    def new_lable(self, lable):
+        self.lables[lable] = self.number_instructions
+
+    def add_instruction(self, instruction):
+        self.instructions.append(instruction)
+        self.number_instructions = self.number_instructions + 1
+
+    def print_instructions(self):
+        print("\n_____Instructions memory")
+        for count, x in enumerate(self.instructions):
+            print(count, x)
+
+    def print_lables(self):
+        print("\n_____Lables______")
+        for x in self.lables:
+            print(x, ': ', self.lables[x])
+
     def execute(self, Instruction):
-        if Instruction.label != None:
-            self.block = Instruction.label
-            self.instructions[self.block] = dict()
-            self.i = 1
-        else:
-            self.instructions[self.block][self.i] = Instruction.get_instruction()
-            self.i = self.i + 1
+        '''TO IMPLEMENT'''
+        return
 
 
 class Instruction(object):
 
-    def __init__(self, label=None, name=None, arg1=None, arg2=None):
-        self.label = label
+    def __init__(self, name=None, arg1=None, arg2=None):
         self.name = name
         self.arg1 = arg1
         self.arg2 = arg2
@@ -33,17 +46,14 @@ class Instruction(object):
     def execute(self):
         return ''
 
-    def get_label(self):
-        return self.label
-
-    def get_instruction(self):
+    def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
 
 
 class add(Instruction):
 
-    def __init__(self, label=None, name='add'):
-        self.label = label
+    def __init__(self, name='add'):
+        super().__init__(name)
         self.name = name
 
     def execute(self):
@@ -57,8 +67,8 @@ class add(Instruction):
 
 class sub(Instruction):
 
-    def __init__(self, label=None, name='sub'):
-        self.label = label
+    def __init__(self, name='sub'):
+        super().__init__(name)
         self.name = name
 
     def execute(self):
@@ -72,8 +82,8 @@ class sub(Instruction):
 
 class mult(Instruction):
 
-    def __init__(self, label=None, name='mult'):
-        self.label = label
+    def __init__(self, name='mult'):
+        super().__init__(name)
         self.name = name
 
     def execute(self):
@@ -87,8 +97,8 @@ class mult(Instruction):
 
 class div(Instruction):
 
-    def __init__(self, label=None, name='div'):
-        self.label = label
+    def __init__(self, name='div'):
+        super().__init__(name)
         self.name = name
 
     def execute(self):
@@ -102,8 +112,8 @@ class div(Instruction):
 
 class mod(Instruction):
 
-    def __init__(self, label=None, name='mod'):
-        self.label = label
+    def __init__(self, name='mod'):
+        super().__init__(name)
         self.name = name
 
     def execute(self):
@@ -117,8 +127,8 @@ class mod(Instruction):
 
 class exp(Instruction):
 
-    def __init__(self, label=None, name='exp'):
-        self.label = label
+    def __init__(self, name='exp'):
+        super().__init__(name)
         self.name = name
 
     def execute(self):
@@ -132,8 +142,8 @@ class exp(Instruction):
 
 class push_int(Instruction):
 
-    def __init__(self, label=None, name='push_int', arg1=None):
-        self.label = label
+    def __init__(self, name='push_int', arg1=None):
+        super().__init__(name, arg1)
         self.name = name
         self.arg1 = arg1
 
@@ -143,10 +153,65 @@ class push_int(Instruction):
         av_stack.append(self.arg1)
 
 
+class set_arg(Instruction):
+
+    def __init__(self, name='set_arg', arg1=None):
+        super().__init__(name, arg1)
+        self.name = name
+        self.arg1 = arg1
+
+    def execute(self):
+        return
+
+
+class jump(Instruction):
+
+    def __init__(self, name='jump', arg1=None):
+        super().__init__(name, arg1)
+        self.name = name
+        self.arg1 = arg1
+
+    def execute(self):
+        return
+
+
+class jeq(Instruction):
+
+    def __init__(self, name='jeq', arg1=None):
+        super().__init__(name, arg1)
+        self.name = name
+        self.arg1 = arg1
+
+    def execute(self):
+        return
+
+
+class jlt(Instruction):
+
+    def __init__(self, name='jlt', arg1=None):
+        super().__init__(name, arg1)
+        self.name = name
+        self.arg1 = arg1
+
+    def execute(self):
+        return
+
+
+class print_str(Instruction):
+
+    def __init__(self, name='print_str', arg1=None):
+        super().__init__(name, arg1)
+        self.name = name
+        self.arg1 = arg1
+
+    def execute(self):
+        return
+
+
 class push_var(Instruction):
 
-    def __init__(self, label=None, name='push_var', arg1=None, arg2=None):
-        self.label = label
+    def __init__(self, name='push_var', arg1=None, arg2=None):
+        super().__init__(name, arg1, arg2)
         self.name = name
         self.arg1 = arg1
         self.arg2 = arg2
@@ -155,3 +220,93 @@ class push_var(Instruction):
         # coloca na pilha a variavel mº arg2 no bloco com distancia arg1
         av_stack = TISC.avaliation_stack
         av_stack.append()
+
+
+class push_arg(Instruction):
+
+    def __init__(self, name='push_arg', arg1=None, arg2=None):
+        super().__init__(name, arg1, arg2)
+        self.name = name
+        self.arg1 = arg1
+        self.arg2 = arg2
+
+    def execute(self):
+        return
+
+
+class store_var(Instruction):
+
+    def __init__(self, name='store_var', arg1=None, arg2=None):
+        super().__init__(name, arg1, arg2)
+        self.name = name
+        self.arg1 = arg1
+        self.arg2 = arg2
+
+    def execute(self):
+        return
+
+
+class store_arg(Instruction):
+
+    def __init__(self, name='store_arg', arg1=None, arg2=None):
+        super().__init__(name, arg1, arg2)
+        self.name = name
+        self.arg1 = arg1
+        self.arg2 = arg2
+
+    def execute(self):
+        return
+
+
+class call(Instruction):
+
+    def __init__(self, name='call', arg1=None, arg2=None):
+        super().__init__(name, arg1, arg2)
+        self.name = name
+        self.arg1 = arg1
+        self.arg2 = arg2
+
+    def execute(self):
+        return
+
+
+class f_locals(Instruction):
+
+    def __init__(self, name='locals', arg1=None, arg2=None):
+        super().__init__(name, arg1, arg2)
+        self.name = name
+        self.arg1 = arg1
+        self.arg2 = arg2
+
+    def execute(self):
+        return
+
+
+class f_return(Instruction):
+
+    def __init__(self, name='return'):
+        super().__init__(name)
+        self.name = name
+
+    def execute(self):
+        return
+
+
+class f_print(Instruction):
+
+    def __init__(self, name='print'):
+        super().__init__(name)
+        self.name = name
+
+    def execute(self):
+        return
+
+
+class f_printnl(Instruction):
+
+    def __init__(self, name='print_nl'):
+        super().__init__(name)
+        self.name = name
+
+    def execute(self):
+        return

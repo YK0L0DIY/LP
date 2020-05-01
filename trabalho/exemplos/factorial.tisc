@@ -5,7 +5,6 @@ program:locals 0 0
 	print		# e imprime
 	print_nl
 	return
-
 fact:	locals 1 2
 	push_int 1
 	store_var 0 2	# f = 1
