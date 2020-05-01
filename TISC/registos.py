@@ -1,9 +1,8 @@
 import ply.yacc as yacc
 import argparse
-# import pprint
-from trabalho.ficheiros2.tekens import tokens
+from tekens import tokens
 
-from trabalho.ficheiros2.TISC import *
+from TISC import *
 
 tisc = TISC()
 
@@ -113,9 +112,10 @@ def p_error(p):
     print('Syntax error')
 
 
-def main(print_inst, print_lables):
+def main(print_inst, print_lables, filepath=None):
     parser = yacc.yacc()
-    filepath = input('Path to the file:')
+    if not filepath:
+        filepath = input('Path to the file:')
 
     with open(filepath) as fp:
         for line in fp:
@@ -125,21 +125,3 @@ def main(print_inst, print_lables):
         tisc.print_instructions()
     if print_lables:
         tisc.print_lables()
-
-
-def print_instruction_memory():
-    print("e")
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog='TISC', description='TISC')
-
-    parser.add_argument('-m, --inst_memory', action='store_true', dest='memory', help='To print instruction memory',
-                        required=False)
-
-    parser.add_argument('-l, --lable_memory', action='store_true', dest='lables', help='To print lables memory',
-                        required=False)
-
-    args = parser.parse_args()
-
-    main(args.memory, args.lables)

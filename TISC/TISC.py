@@ -1,6 +1,3 @@
-from collections import deque
-
-
 class TISC:
     pc = 0
     sp = 0
@@ -8,7 +5,7 @@ class TISC:
     vars = []
     lables = {}
     instructions = []
-    avaliation_stack = deque()
+    avaliation_stack = []
     number_instructions = 0
 
     block = ''
@@ -22,7 +19,7 @@ class TISC:
         self.number_instructions = self.number_instructions + 1
 
     def print_instructions(self):
-        print("\n_____Instructions memory")
+        print("\n_____Instructions memory_____")
         for count, x in enumerate(self.instructions):
             print(count, x)
 
@@ -161,6 +158,7 @@ class set_arg(Instruction):
         self.arg1 = arg1
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -172,6 +170,7 @@ class jump(Instruction):
         self.arg1 = arg1
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -183,6 +182,7 @@ class jeq(Instruction):
         self.arg1 = arg1
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -194,6 +194,7 @@ class jlt(Instruction):
         self.arg1 = arg1
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -205,6 +206,7 @@ class print_str(Instruction):
         self.arg1 = arg1
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -231,6 +233,7 @@ class push_arg(Instruction):
         self.arg2 = arg2
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -243,6 +246,7 @@ class store_var(Instruction):
         self.arg2 = arg2
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -255,6 +259,7 @@ class store_arg(Instruction):
         self.arg2 = arg2
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -267,6 +272,7 @@ class call(Instruction):
         self.arg2 = arg2
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -279,6 +285,7 @@ class f_locals(Instruction):
         self.arg2 = arg2
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -289,6 +296,7 @@ class f_return(Instruction):
         self.name = name
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -299,6 +307,7 @@ class f_print(Instruction):
         self.name = name
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return
 
 
@@ -309,4 +318,5 @@ class f_printnl(Instruction):
         self.name = name
 
     def execute(self):
+        '''TO IMPLEMENT'''
         return

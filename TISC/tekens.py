@@ -36,7 +36,6 @@ tokens = (
 
     'STRING',
 
-    'ERRO',
     'COMENTARIO',
 )
 
