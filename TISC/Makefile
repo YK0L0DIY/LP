@@ -1,5 +1,7 @@
 PYV=$(shell python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_info[:2]));sys.stdout.write(t)");
 
+defoult: run
+
 clean:
 	rm parser.out parsetab.py
 
