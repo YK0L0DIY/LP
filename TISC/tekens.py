@@ -139,7 +139,7 @@ def t_JUMP(t):
 def t_JEQ(t):
     'jeq'
     t.value = 'jeq'
-    return 'jeq'
+    return t
 
 
 def t_JLT(t):

@@ -118,8 +118,7 @@ def main(print_inst, print_lables, filepath=None):
         filepath = input('Path to the file:')
 
     with open(filepath) as fp:
-        for line in fp:
-            parser.parse(line)
+       parser.parse(fp.read())
 
     if print_inst:
         tisc.print_instructions()
