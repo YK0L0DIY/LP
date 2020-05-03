@@ -211,9 +211,9 @@ Neste ficheiro é executada a função \textit{main} que foi criada no ficheiro 
 Este ficheiro poderá ser executado através do comando \textit{python3 main.py}, sendo que neste caso como não são passados quaisquer argumentos irá ser pedido o caminho do ficheiro a ler ao utilizador, mas não irá mostrar a memória de instruções nem as \textit{labels}. Para tal será necessário passar alguns argumentos a seguir ao nome do ficheiro sendo estes:
 
 \begin{itemize}
-\item \textbf{-m} - ao passar este argumento será mostrada a memória de instruções ao utilizador;
-\item \textbf{-l} - ao passar este argumento serão mostradas as etiquetas existentes no programa ao utilizador;
-\item \textbf{-filepath} - ao passar este argumento seguido do caminho para o ficheiro, já não será perguntado ao utilizador qual o caminho do ficheiro que pretende ler.
+\item \textbf{-m \textnormal{ou} -{}-inst\_memory} - ao passar este argumento será mostrada a memória de instruções ao utilizador;
+\item \textbf{-l \textnormal{ou} -{}-label\_memory} - ao passar este argumento serão mostradas as etiquetas existentes no programa ao utilizador;
+\item \textbf{-f \textnormal{ou} -{}-file\_path} - ao passar este argumento seguido do caminho para o ficheiro, já não será perguntado ao utilizador qual o caminho do ficheiro que pretende ler.
 \end{itemize}
 
 Tudo isto é possível através das chamadas da função \textit{parser.add\_argument} utilizadas neste ficheiro. Por fim é então chamada a função \textbf{main()} do ficheiro registos.py com os respetivos argumentos.
