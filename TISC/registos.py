@@ -18,11 +18,11 @@ def p_prgram_empty(t):
     pass
 
 
-# criar uma lable para os jumps e funcoes
+# criar uma label para os jumps e funcoes
 def p_etiqueta(p):
     '''etiqueta : IDENTIFICADOR DOIS_PONTOS'''
 
-    p[0] = tisc.new_lable(p[1])
+    p[0] = tisc.new_label(p[1])
 
 
 def p_etiqueta_empty(p):
@@ -112,7 +112,7 @@ def p_error(p):
     print('Syntax error')
 
 
-def main(print_inst, print_lables, filepath=None):
+def main(print_inst, print_labels, filepath=None):
     parser = yacc.yacc()
     if not filepath:
         filepath = input('Path to the file:')
@@ -122,5 +122,5 @@ def main(print_inst, print_lables, filepath=None):
 
     if print_inst:
         tisc.print_instructions()
-    if print_lables:
-        tisc.print_lables()
+    if print_labels:
+        tisc.print_labels()

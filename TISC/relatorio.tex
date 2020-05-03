@@ -1,0 +1,241 @@
+\documentclass[titlepage,11pt,svgnames]{article}   % tipo de documento e tamanho das letras
+
+% os seguintes pacotes estendem a funcionalidade básica:
+\usepackage[a4paper, total={16cm, 24cm}]{geometry} % tamanho da pagina e do texto
+\usepackage[portuguese]{babel}  % texto lingua portuguesa
+\usepackage{graphicx}           % graficos
+\usepackage{amsmath}            % matematica
+\usepackage{tikz}               % diagramas
+    \usetikzlibrary{shadows}
+\usepackage{booktabs}           % tabelas com melhor aspecto
+\usepackage[colorlinks=true]{hyperref}           % links para partes do documento ou para a web
+\usepackage{listings}           % incluir codigo
+    \renewcommand\lstlistingname{Código}  % Listing em portugues
+    \lstset{numbers=left,
+            numberstyle=\tiny,
+            numbersep=5pt,
+            basicstyle=\footnotesize\ttfamily,
+            frame=tb,
+            rulesepcolor=\color{gray},
+            breaklines=true}
+\usepackage{blindtext}          % Lorem ipsum...
+\usepackage{titlepic}           % incluir imagem no titlo
+\usepackage{multicol}           % paragrafo em varias colunas
+
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+
+\usepackage{sectsty}
+\sectionfont{\color{DarkBlue}}
+\subsectionfont{\color{NavyBlue}}
+% ----------------------------------------------------------------------------
+\title{Leitura de programas TISC}
+\author{Ana Sapata\\nº 42255 \and Yaroslav Kolodiy\\n.º 39859}
+\date{\today}
+
+% ----------------------------------------------------------------------------
+\begin{document}
+\begin{titlepage}
+    \setlength{\parindent}{0pt}
+    \vspace*{-3.8\baselineskip}
+    Universidade de Évora \hfill \includegraphics[width=0.3\columnwidth]{pomba.png} \\ 
+    Escola de Ciências e Tecnologia \\ 
+    Licenciatura em Engenharia Informática \\ 
+    Linguagens de Programação \\
+    Ano Letivo 2019/2020 
+    
+\noindent\makebox[\linewidth]{\rule{16cm}{0.4pt}}
+    \begin{center}
+    \vspace{.39\textheight}
+    {\huge\bfseries \color{DarkBlue} Leitura de programas TISC \par}
+    \bigbreak
+    \today
+	\end{center}
+    \vspace*{16\baselineskip}
+   	\hspace*{10cm}
+	Docente: Prof. Teresa Gonçalves\\ 
+	\hspace*{10cm}	
+	Discentes:    
+    \begin{itemize}
+    \addtolength{\itemindent}{10cm}
+    \item Ana Sapata, 42255
+    \item Yaroslav Kolodiy, 39859
+    \end{itemize}
+
+\end{titlepage}
+
+%\maketitle
+
+\hypersetup{linkcolor=black}
+\tableofcontents
+\pagebreak
+
+% ============================================================================
+
+\section{Introdução}
+\label{sec:intro}
+Este trabalho está englobado na disciplina de Linguagens de Programação, da Licenciatura em Engenharia Informática, da Universidade de Évora.
+Com o mesmo pretende-se através de um programa realizado em Python, ler um programa TISC e carregar o mesmo na memória de instruções.
+
+Sendo que uma máquina TISC executa programas escritos numa linguagem estrutura em blocos e a mesma é composta por três zonas de memória distintas e dois registos. As zonas de memória são a memória de instruções, a qual será o output deste trabalho, a pilha de avaliação e a memória de execução. Os registos são o \textit{environment pointer} (\textbf{EP}) e o \textit{program counter} (\textbf{PC}).
+\pagebreak
+
+% ============================================================================
+
+\section{Programa TISC e suas instruções}
+\label{sec:desc_prob}
+
+Como já referido o output do programa Python será a memória de instruções da máquina TISC, ou seja, a estrutura onde serão guardadas as instruções que o programa deverá executar. Para tal é então necessário perceber como são as instruções de um programa TISC e como são executadas as mesmas.
+
+As instruções podem ser ou não identificadas por uma etiqueta, sendo que no início de cada programa a primeira instrução deverá ter a etiqueta \textit{program}. Geralmente as instruções serão executadas pela ordem em que se encontram, exceto se existirem instruções de salto ou as instruções \textit{call} e \textit{return}.
+
+Para se construir a sintaxe verificou-se que para alem das etiquetas as instruções teriam o seu nome e até dois argumentos, sendo possível terem zero argumentos. As instruções poderão ser:
+\begin{itemize}
+\item \textbf{instruções aritméticas} - são compostas apenas pelo seu nome e possível etiqueta, e a sua operação é desempenhada utilizando elementos da pilha de avaliação;
+\item \textbf{instruções para manipulação de inteiros} - são compostas pelo seu nome e um argumento do tipo inteiro. Existem apenas uma instrução nesta categoria, denominada \textit{push\_int} e que coloca o inteiro na pilha de avaliação;
+\item \textbf{instruções de acesso a variáveis} - são declaradas no inico dos blocos, para alem do seu nome, são constituídas por 2 argumentos do tipo inteiro. Estas instruções leem e escrevem o valor das variáveis;
+\item \textbf{instruções de acesso a argumentos} - são compostas pelo seu nome e 2 argumentos do tipo inteiros e al como as anteriores leem e escrevem, mas neste caso, argumentos em vez de variáveis;
+\item \textbf{instruções para chamada de funções} - estas instruções poderão ter entre 0 e 2 argumentos, alem do seu nome e da possível etiqueta. As instruções desta categoria servem essencialmente para efetuar a chamada de funções, bem como para processar o início e fim da sua execução, manipulando os registos de ativação;
+\item \textbf{instruções de salto} - são instruções compostas pelo seu nome e um só argumento, sendo este a etiqueta da instrução para onde o programa deverá saltar, ou seja, a etiqueta da próxima instrução a executar;
+\item \textbf{instruções de saída} - para alem do seu nome, poderão ter ainda um argumento sendo este uma \textit{string}, ou nenhum. Estas instruções servem para enviar informação para o ecrã.
+\end{itemize}
+
+\pagebreak
+
+% ============================================================================
+
+\section{Implementação}
+
+Para se poderem ler ficheiros \textit{.tisc} e criar a memória de instruções para o mesmo, foi necessário verificar a sintaxe das instruções através da estrutura das instruções observada anteriormente. Além disso foram utilizados os packages \textit{ply.lex} e \textit{ply.yacc} para a construção da parte lexical e criação do \textit{parser}.
+
+O programa é composto por 5 ficheiros essenciais:
+
+\begin{itemize}
+\item \textbf{TISC.py} - este ficheiro contem essencialmente a classe TISC e as classes para cada instrução;
+\item \textbf{tekens.py} - este ficheiro contem os \textit{tokens} necessários para a construção da parte lexical;
+\item \textbf{registos.py} - este ficheiro contem a informação para o \textit{parser} e a função \textit{main} que irá efetuar a leitura do ficheiro \textit{.tisc};
+\item \textbf{main.py} - este ficheiro executa a função \textit{main} previamente definida;
+\item \textbf{Makefile} - é através da execução deste ficheiro que irá ser executado o nosso programa.
+\end{itemize}
+
+Para além destes ficheiros cada vez que são lidos ficheiros \textit{.tisc} são ainda gerados pelo \textit{parser} os ficheiros \textbf{parser.out} e \textbf{parsetab.py} relacionados com a gramática.
+
+De seguida, irão ser apresentados os cinco ficheiros essenciais mais sucintamente.
+
+\subsection{TISC.py}
+
+Este ficheiro é então constituído pela classe TISC, pela classe \textit{Instruction} e por várias subclasses desta, correspondendo cada uma a uma instrução do programa.
+
+\begin{itemize}
+\item TISC
+
+Um objeto TISC é composto por dois registos, \textbf{PC} e \textbf{SP}, tal como referido, e por:
+\begin{itemize}
+\item \textbf{labels} - um dicionário que guarda as etiquetas, bem como o número que indica a que instrução pertence a referida label, de modo a ser possível voltar à mesma, quando for efetuado um salto para a respetiva etiqueta;
+\item \textbf{instructions} - um array que guarda as instruções do programa. Este array será então a memória de instruções que irá ser o output final do programa;
+\item \textbf{avaliation\_stack} - um array que será a pilha de avaliação;
+\item \textbf{number\_instructions} - irá guardar o número de instruções que o programa tem;
+\end{itemize}
+
+Quando é lida uma instrução que contem uma etiqueta é utilizado o método \textbf{new\_label (self, label)} que adiciona o mesmo ao dicionário \textit{labels} e o número da respetiva instrução no programa.
+
+Para adicionar uma nova instrução à memória de instruções é utilizado o método \textbf{add\_ins\-truction(self, instruction)}. Este método adiciona a instrução ao array \textit{instructions} e aumenta o \textit{number\_instructions} em 1.
+
+Como o objetivo é mostrar a memória de instruções, existe o método \textbf{print\_instructions (self)} que realiza o print de cada instrução para o utilizador final.
+Existe ainda o método \textbf{print\_labels(self)} que faz o mesmo, mas neste caso para o dicionário \textit{labels} que contem as etiquetas.
+
+Por implementar está o método \textbf{execute(self)} que irá executar o programa lido e carregado na memória de instruções.
+
+
+\item Instruction
+
+As instruções são então compostas pelo seu nome e argumentos. Todas elas serão constituídas  pelo método \textbf{\_\_init\_\_} que inicializa as mesmas e coloca o nome igual ao passado no método, e no caso de existirem argumentos coloca estes com o valor que foi passado no método. No caso de não serem passados argumentos no método, por defeito ficará tudo como sendo \textit{None}.
+
+Todas terão também o método \textbf{execute} que irá executar a mesma.
+
+O método \textbf{\_\_repr\_\_} retorna uma maneira de representar as instruções, ou seja, como estas irão ser mostradas no ecrã quando será feito print das mesmas.
+
+Para além da classe global existem subclasses. Todas as subclasses têm um método \textbf{\_\_init\_\_} onde é passado o nome da respetiva função como \textit{default} e os respetivos argumentos no caso de a mesma receber argumentos. De seguida é chamado o mesmo método da sua super classe.
+
+Todas as subclasses têm o método \textbf{execute}, onde será posteriormente implementado o funcionamento de cada instrução.
+
+\end{itemize}
+
+\subsection{tekens.py}
+
+O ficheiro teken.py utiliza o package \textit{ply.lex}. Através desta biblioteca o programa que vai ser lido, irá ser separado segundo os \textit{tokens} previamente fornecidos, os quais têm uma coleção de regras de expressões regulares.
+
+Deste modo é inicialmente fornecida uma lista \textbf{\textit{tokens}}, onde estão todos os \textit{tokens} utilizados nos programas TISC, desde os nomes das instruções, ao tipo de argumentos, por exemplos \textit{INTEIRO}, \textit{STRING}, entre outros.
+
+Para cada \textit{token} da lista foi criada uma função cujo seu nome é \textbf{t\_<token>} onde \textit{<token>} é substituído pelo \textit{token} em questão. Todas as funções recebem um argumento \textbf{t}, que é uma instância do \textit{LexToken}, sendo a função inicialmente composta pela expressão regular associada ao respetivo \textit{token}. 
+
+De seguida é atribuído ao parâmetro \textit{value} do \textit{LexToken} (\textit{t.value}) o valor correspondente ao \textit{token}, ou seja, no caso das funções será o seu nome, no caso de um inteiro será feito convertido o texto recebido para um inteiro, no caso de uma \textit{string} o texto recebido será convertido para uma \textit{string}.
+
+Em alguns casos mais simples não é necessário criar a função \textbf{t\_<token>} sendo apenas especificada a expressão regular que o identifica, como no caso dos \textit{DOIS\_PONTOS} que ficou 
+\begin{lstlisting}
+t_DOIS_PONTOS = r':'
+\end{lstlisting}
+
+Por fim, é então construído o \textit{lexer} através da chamada da função \textit{lex.lex()}.
+
+\subsection{registos.py}
+
+Este ficheiro importa o anterior \textit{tekens.py} uma vez que os \textit{tokens} serão necessários no \textit{parser}. É também utilizado o package \textit{ply.yacc}, este geralmente é utilizado para reconhecer a sintaxe da linguagem, utilizando os \textit{tokens} e as regras gramaticais, para construir as árvores de sintaxe abstrata.
+
+Começou-se por criar um objeto do tipo TISC, pois irá ser necessário adicionar as instruções à sua memória de instruções à medida que as mesmas forem lidas e analisadas.
+
+Neste ficheiro observam-se várias funções, sendo que todas elas, exceto o \textit{main}, definem as regras gramaticais, sendo para tal apresentada a sintaxe em termos de gramática BNF que será utilizada para analisar os inputs fornecidos ao \textit{parser}.
+
+\begin{itemize}
+\item \textbf{p\_programa(t)} - esta função define a regra gramatical para o programa;
+\item \textbf{p\_programa\_empty(t)} - esta função define a regra gramatical para o caso do programa ser vazio;
+\item \textbf{p\_etiqueta(p)} - esta função define a regra gramatical para as etiquetas, sendo as mesmas compostas por um identificador seguido de dois pontos. Neste caso será adicionado o identificador ao dicionário \textit{labels} do objeto TISC previamente criado;
+\item \textbf{p\_etiqueta\_empty(p)} - esta função define a regra gramatical para o caso da etiqueta ser vazia;
+\item \textbf{p\_instrucao(p)} - nesta função é definida a regra para as instruções que não têm argumentos, ou seja, aquelas que são apenas constituídas pelo seu nome, como o caso de todas as instruções aritméticas, entre outras. A instrução será adicionada à memória de instruções do objeto TISC, sendo criado um objeto do respetivo tipo, de acordo com o valor de \textit{p[1]};
+\item \textbf{p\_instrucao\_arg1(p)} - nesta função são definidas as regras para as instruções que alem do seu nome contêm um argumento. Neste caso quando a instrução é adicionada à memória de instruções, de acordo com o seu valor de \textit{p[1]}, é ainda passado à mesma o seu argumento com o valor de \textit{p[2]};
+\item \textbf{p\_instrucao\_arg2(p)} - nesta função são definidas as regras para as instruções que contêm o seu nome e dois argumentos, sendo as mesmas adicionadas à memória de instruções de acordo com o seu valor de \textit{p[1]}. Nos argumentos são passados o valor de \textit{p[2]} e \textit{p[3]};
+\item \textbf{p\_error(p)} - esta função é utilizada no caso de ocorrer algum erro, enviando para o ecrã a mensagem \textit{"Syntax error"}.
+\end{itemize}
+
+Por fim existe a função \textbf{main(print\_inst, print\_labels, filepath = None)} que é diferente das restantes. Esta função inicializa o \textit{parser} através da chamada da função \textit{yacc.yacc()}. 
+
+O argumento \textit{filepath}, é referente ao caminho para o ficheiro que se pretende ler, no caso deste argumento não ser fornecido à função \textit{main} o mesmo será pedido ao utilizador.
+Quando existir um valor no \textit{pathfile}, irá então ser lido o ficheiro que se encontra no respetivo caminho fornecido.
+
+O \textit{parser} irá analisar cada linha do ficheiro. No caso de ser passado o argumento print\_inst na função \textit{main} irá ser mostrada ao utilizador a memoria de instruções do objeto TISC. No caso de ser passado o argumento \textit{print\_labels}, irá ser mostrado o dicionário que contem as \textit{labels} do objeto TISC.
+
+\subsection{main.py}
+
+Neste ficheiro é executada a função \textit{main} que foi criada no ficheiro registos.py. É ainda utilizado o package \textit{argparse} que será utilizado para passar argumentos à execução do ficheiro.
+
+Este ficheiro poderá ser executado através do comando \textit{python3 main.py}, sendo que neste caso como não são passados quaisquer argumentos irá ser pedido o caminho do ficheiro a ler ao utilizador, mas não irá mostrar a memória de instruções nem as \textit{labels}. Para tal será necessário passar alguns argumentos a seguir ao nome do ficheiro sendo estes:
+
+\begin{itemize}
+\item \textbf{-m} - ao passar este argumento será mostrada a memória de instruções ao utilizador;
+\item \textbf{-l} - ao passar este argumento serão mostradas as etiquetas existentes no programa ao utilizador;
+\item \textbf{-filepath} - ao passar este argumento seguido do caminho para o ficheiro, já não será perguntado ao utilizador qual o caminho do ficheiro que pretende ler.
+\end{itemize}
+
+Tudo isto é possível através das chamadas da função \textit{parser.add\_argument} utilizadas neste ficheiro. Por fim é então chamada a função \textbf{main()} do ficheiro registos.py com os respetivos argumentos.
+
+\subsection{Makefile}
+
+Com a existência deste ficheiro já não será necessário correr o ficheiro main.py pois este já irá executar o mesmo.
+
+Na linha de comandos poderá correr os seguintes comandos:
+
+\begin{itemize}
+\item \textbf{make run} - este comando irá correr o ficheiro main.py com os argumentos -m -l, ou seja, irá mostrar a memoria de instruções e as etiquetas. No entanto irá ser perguntado ao utilizador qual o caminho para o ficheiro que pretende ler;
+\item \textbf{make run\_file} - a este comando deverá ainda adicionar o caminho do ficheiro que pretende ler, ou seja, no terminal deverá escrever \textit{make run\_file FILE=<pathfile>}. Deste modo irá ser logo lido o ficheiro e mostrada a respetiva memória de instruções e etiquetas;
+\item \textbf{make help} - ao correr este comando irá ser mostrada a ajuda para o ficheiro main.py, ou seja, os argumentos que podem ser fornecidos a este e o que cada um significa;
+\item \textbf{make install} - a este comando deverá adicionar o \textit{PV = pip} ou \textit{PV = pip3}, consoante a versão do python que utiliza, e o mesmo irá instalar o package ply;
+\item \textbf{make clean} - ao correr este comando irão ser removidos os ficheiros parser.out  e parsetab.py que são gerados pelo parser ao ler o programa.
+\end{itemize}
+
+\pagebreak
+% ============================================================================
+\section{Conclusão}
+
+Consoante o ficheiro fornecido pelo utilizador e os parâmetros utilizados pelo mesmo, é então fornecida a memória de instruções do programa contido no ficheiro. Tudo isto é possível devido à utilização dos packages \textit{ply.lex} e \textit{ply.yacc} na construção da gramática e análise de sintaxe e posterior leitura do ficheiro.
+
+\end{document}
