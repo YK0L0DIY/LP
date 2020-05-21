@@ -19,8 +19,8 @@ class TISC:
 
     def print_instructions(self):
         print("\n_____Instructions memory_____")
-        for count, x in enumerate(self.instructions):
-            print(count, x)
+        for count, inst in enumerate(self.instructions):
+            inst.imprimir(count)
 
     def print_labels(self):
         print("\n_____Lables______")
@@ -45,6 +45,9 @@ class Instruction(object):
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
 
+    def imprimir(self, count):
+        print(str(count) + " " + self.__repr__())
+
 
 class add(Instruction):
 
@@ -58,6 +61,12 @@ class add(Instruction):
         arg2 = av_stack.pop()
         res = arg2 + arg1
         av_stack.append(res)
+
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class sub(Instruction):
@@ -73,6 +82,12 @@ class sub(Instruction):
         res = arg2 - arg1
         av_stack.append(res)
 
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class mult(Instruction):
 
@@ -86,6 +101,12 @@ class mult(Instruction):
         arg2 = av_stack.pop()
         res = arg2 * arg1
         av_stack.append(res)
+
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class div(Instruction):
@@ -101,6 +122,12 @@ class div(Instruction):
         res = arg2 / arg1
         av_stack.append(res)
 
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class mod(Instruction):
 
@@ -114,6 +141,12 @@ class mod(Instruction):
         arg2 = av_stack.pop()
         res = arg2 % arg1
         av_stack.append(res)
+
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class exp(Instruction):
@@ -130,6 +163,12 @@ class exp(Instruction):
         res = arg2 ** arg1
         av_stack.append(res)
 
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class push_int(Instruction):
 
@@ -141,6 +180,12 @@ class push_int(Instruction):
         av_stack = TISC.avaliation_stack
         av_stack.append(self.arg1)
 
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class set_arg(Instruction):
 
@@ -150,6 +195,12 @@ class set_arg(Instruction):
     def execute(self):
         '''TO IMPLEMENT'''
         return
+
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class jump(Instruction):
@@ -161,6 +212,12 @@ class jump(Instruction):
         '''TO IMPLEMENT'''
         return
 
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class jeq(Instruction):
 
@@ -170,6 +227,12 @@ class jeq(Instruction):
     def execute(self):
         '''TO IMPLEMENT'''
         return
+
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class jlt(Instruction):
@@ -181,6 +244,12 @@ class jlt(Instruction):
         '''TO IMPLEMENT'''
         return
 
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class print_str(Instruction):
 
@@ -191,6 +260,11 @@ class print_str(Instruction):
         '''TO IMPLEMENT'''
         return
 
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 class push_var(Instruction):
 
@@ -202,6 +276,12 @@ class push_var(Instruction):
         av_stack = TISC.avaliation_stack
         av_stack.append()
 
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class push_arg(Instruction):
 
@@ -211,6 +291,12 @@ class push_arg(Instruction):
     def execute(self):
         '''TO IMPLEMENT'''
         return
+
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class store_var(Instruction):
@@ -222,6 +308,12 @@ class store_var(Instruction):
         '''TO IMPLEMENT'''
         return
 
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class store_arg(Instruction):
 
@@ -231,6 +323,12 @@ class store_arg(Instruction):
     def execute(self):
         '''TO IMPLEMENT'''
         return
+
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class call(Instruction):
@@ -242,6 +340,12 @@ class call(Instruction):
         '''TO IMPLEMENT'''
         return
 
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class f_locals(Instruction):
 
@@ -251,6 +355,12 @@ class f_locals(Instruction):
     def execute(self):
         '''TO IMPLEMENT'''
         return
+
+    def __repr__(self):
+        return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
+
+    def imprimir(self, count):
+        super().imprimir(count)
 
 
 class f_return(Instruction):
@@ -262,6 +372,12 @@ class f_return(Instruction):
         '''TO IMPLEMENT'''
         return
 
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class f_print(Instruction):
 
@@ -272,6 +388,12 @@ class f_print(Instruction):
         '''TO IMPLEMENT'''
         return
 
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
+
 
 class f_printnl(Instruction):
 
@@ -281,3 +403,9 @@ class f_printnl(Instruction):
     def execute(self):
         '''TO IMPLEMENT'''
         return
+
+    def __repr__(self):
+        return str(self.name)
+
+    def imprimir(self, count):
+        super().imprimir(count)
