@@ -1,14 +1,16 @@
+from executionmemory import ExecutionMemory
+
+
 class TISC:
     pc = 0
     sp = 0
 
     labels = {}
-    instructions = []
+    instructions: list = []
     avaliation_stack = []
+    execution_memory = ExecutionMemory()
     number_instructions = 0
-
-    block = ''
-    i = 0
+    set_args = {}
 
     def new_label(self, label):
         self.labels[label] = self.number_instructions
@@ -27,8 +29,12 @@ class TISC:
         for x in self.labels:
             print(x, ': ', self.labels[x])
 
-    def execute(self, Instruction):
-        '''TO IMPLEMENT'''
+    def execute(self):
+
+        while self.execution_memory.have_blocks():
+            self.pc = self.pc + 1
+            self.instructions[self.pc - 1].execute(self)
+
         return
 
 
@@ -39,7 +45,7 @@ class Instruction(object):
         self.arg1 = arg1
         self.arg2 = arg2
 
-    def execute(self):
+    def execute(self, TISC):
         return ''
 
     def __repr__(self):
@@ -54,7 +60,7 @@ class add(Instruction):
     def __init__(self, name='add'):
         super().__init__(name)
 
-    def execute(self):
+    def execute(self, TISC):
         # arg2 + arg1, nd arg1=1º elemento da pilha e arg2=2ºelemento da pilha
         av_stack = TISC.avaliation_stack
         arg1 = av_stack.pop()
@@ -74,7 +80,7 @@ class sub(Instruction):
     def __init__(self, name='sub'):
         super().__init__(name)
 
-    def execute(self):
+    def execute(self, TISC):
         # arg2 - arg1, nd arg1=1º elemento da pilha e arg2=2ºelemento da pilha
         av_stack = TISC.avaliation_stack
         arg1 = av_stack.pop()
@@ -94,7 +100,7 @@ class mult(Instruction):
     def __init__(self, name='mult'):
         super().__init__(name)
 
-    def execute(self):
+    def execute(self, TISC):
         # arg2 * arg1, nd arg1=1º elemento da pilha e arg2=2ºelemento da pilha
         av_stack = TISC.avaliation_stack
         arg1 = av_stack.pop()
@@ -114,13 +120,13 @@ class div(Instruction):
     def __init__(self, name='div'):
         super().__init__(name)
 
-    def execute(self):
+    def execute(self, TISC):
         # arg2 / arg1, nd arg1=1º elemento da pilha e arg2=2ºelemento da pilha
         av_stack = TISC.avaliation_stack
         arg1 = av_stack.pop()
         arg2 = av_stack.pop()
         res = arg2 / arg1
-        av_stack.append(res)
+        av_stack.append(int(res))
 
     def __repr__(self):
         return str(self.name)
@@ -134,7 +140,7 @@ class mod(Instruction):
     def __init__(self, name='mod'):
         super().__init__(name)
 
-    def execute(self):
+    def execute(self, TISC):
         # arg2 % arg1, nd arg1=1º elemento da pilha e arg2=2ºelemento da pilha
         av_stack = TISC.avaliation_stack
         arg1 = av_stack.pop()
@@ -154,8 +160,7 @@ class exp(Instruction):
     def __init__(self, name='exp'):
         super().__init__(name)
 
-
-    def execute(self):
+    def execute(self, TISC):
         # arg2 ** arg1, nd arg1=1º elemento da pilha e arg2=2ºelemento da pilha
         av_stack = TISC.avaliation_stack
         arg1 = av_stack.pop()
@@ -175,7 +180,7 @@ class push_int(Instruction):
     def __init__(self, name='push_int', arg1=None):
         super().__init__(name, arg1)
 
-    def execute(self):
+    def execute(self, TISC):
         # envia para a pilha
         av_stack = TISC.avaliation_stack
         av_stack.append(self.arg1)
@@ -192,9 +197,9 @@ class set_arg(Instruction):
     def __init__(self, name='set_arg', arg1=None):
         super().__init__(name, arg1)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        value = TISC.avaliation_stack.pop()
+        TISC.set_args[self.arg1] = value
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1)
@@ -208,9 +213,8 @@ class jump(Instruction):
     def __init__(self, name='jump', arg1=None):
         super().__init__(name, arg1)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        TISC.pc = TISC.labels[self.arg1]
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1)
@@ -224,9 +228,11 @@ class jeq(Instruction):
     def __init__(self, name='jeq', arg1=None):
         super().__init__(name, arg1)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        value1 = TISC.avaliation_stack.pop()
+        value2 = TISC.avaliation_stack.pop()
+        if value1 == value2:
+            TISC.pc = TISC.labels[self.arg1]
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1)
@@ -240,9 +246,11 @@ class jlt(Instruction):
     def __init__(self, name='jlt', arg1=None):
         super().__init__(name, arg1)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        value1 = TISC.avaliation_stack.pop()
+        value2 = TISC.avaliation_stack.pop()
+        if value1 > value2:
+            TISC.pc = TISC.labels[self.arg1]
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1)
@@ -256,8 +264,8 @@ class print_str(Instruction):
     def __init__(self, name='print_str', arg1=None):
         super().__init__(name, arg1)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
+    def execute(self, TISC):
+        print(self.arg1)
         return
 
     def __repr__(self):
@@ -266,15 +274,16 @@ class print_str(Instruction):
     def imprimir(self, count):
         super().imprimir(count)
 
+
 class push_var(Instruction):
 
     def __init__(self, name='push_var', arg1=None, arg2=None):
         super().__init__(name, arg1, arg2)
 
-    def execute(self):
+    def execute(self, TISC):
         # coloca na pilha a variavel mº arg2 no bloco com distancia arg1
-        av_stack = TISC.avaliation_stack
-        av_stack.append()
+        value = TISC.execution_memory.get_value_var(TISC.sp, self.arg1, self.arg2)
+        TISC.avaliation_stack.append(value)
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
@@ -288,9 +297,9 @@ class push_arg(Instruction):
     def __init__(self, name='push_arg', arg1=None, arg2=None):
         super().__init__(name, arg1, arg2)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        value = TISC.execution_memory.get_value_var(TISC.sp, self.arg1, self.arg2)
+        TISC.avaliation_stack.append(value)
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
@@ -304,9 +313,9 @@ class store_var(Instruction):
     def __init__(self, name='store_var', arg1=None, arg2=None):
         super().__init__(name, arg1, arg2)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        value = TISC.avaliation_stack.pop()
+        TISC.execution_memory.store_value_var(TISC.sp, self.arg1, self.arg2, value)
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
@@ -320,9 +329,9 @@ class store_arg(Instruction):
     def __init__(self, name='store_arg', arg1=None, arg2=None):
         super().__init__(name, arg1, arg2)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        value = TISC.avaliation_stack.pop()
+        TISC.execution_memory.store_value_arg(TISC.sp, self.arg1, self.arg2, value)
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
@@ -336,9 +345,13 @@ class call(Instruction):
     def __init__(self, name='call', arg1=None, arg2=None):
         super().__init__(name, arg1, arg2)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        sp = TISC.sp
+        TISC.sp = TISC.execution_memory.new_block()
+        TISC.execution_memory.set_CL(TISC.sp, sp)
+        TISC.execution_memory.set_ER(TISC.sp, TISC.pc)
+        TISC.pc = TISC.labels[self.arg2]
+        # TODO perguntyar por causa da profundidade??
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
@@ -352,9 +365,10 @@ class f_locals(Instruction):
     def __init__(self, name='locals', arg1=None, arg2=None):
         super().__init__(name, arg1, arg2)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        TISC.execution_memory.set_number_of_vars(TISC.sp, self.arg2)
+        TISC.execution_memory.set_number_of_args(TISC.sp, self.arg1, TISC.set_args)
+        TISC.set_args = {}
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
@@ -368,9 +382,9 @@ class f_return(Instruction):
     def __init__(self, name='return'):
         super().__init__(name)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        TISC.pc = TISC.execution_memory.get_ER(TISC.sp)
+        TISC.sp = TISC.execution_memory.drop_block(TISC.sp)
 
     def __repr__(self):
         return str(self.name)
@@ -384,9 +398,9 @@ class f_print(Instruction):
     def __init__(self, name='print'):
         super().__init__(name)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
-        return
+    def execute(self, TISC):
+        value = TISC.avaliation_stack.pop()
+        print(value, )
 
     def __repr__(self):
         return str(self.name)
@@ -400,8 +414,8 @@ class f_printnl(Instruction):
     def __init__(self, name='print_nl'):
         super().__init__(name)
 
-    def execute(self):
-        '''TO IMPLEMENT'''
+    def execute(self, TISC):
+        print('\n')
         return
 
     def __repr__(self):

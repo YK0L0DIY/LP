@@ -21,3 +21,6 @@ class Instruction(object):
     def __repr__(self):
         return f'{self.label},{self.name},{self.arg1},{self.arg2}'
 
+    def imprimir(self, count):
+        pass
+

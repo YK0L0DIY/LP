@@ -118,9 +118,11 @@ def main(print_inst, print_labels, filepath=None):
         filepath = input('Path to the file:')
 
     with open(filepath) as fp:
-       parser.parse(fp.read())
+        parser.parse(fp.read())
 
     if print_inst:
         tisc.print_instructions()
     if print_labels:
         tisc.print_labels()
+
+    tisc.execute()
