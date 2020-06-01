@@ -349,7 +349,6 @@ class call(Instruction):
 
     def execute(self, TISC):
         sp = TISC.sp
-        al = TISC.execution_memory.get_AL(sp)
         TISC.sp = TISC.execution_memory.new_block()
         TISC.execution_memory.set_CL(TISC.sp, sp)
         TISC.execution_memory.set_ER(TISC.sp, TISC.pc)
@@ -357,7 +356,7 @@ class call(Instruction):
 
         if self.arg1 == -1:
             TISC.set_AL = sp
-        elif self.arg1 == 0:
+        elif self.arg1 >= 0:
             TISC.set_AL = TISC.execution_memory.get_correct_AL(sp, self.arg1)
 
     def __repr__(self):
