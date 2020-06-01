@@ -30,9 +30,10 @@ class TISC:
             print(x, ': ', self.labels[x])
 
     def execute(self):
-
+        self.pc = self.labels['program'] or 0
         while self.execution_memory.have_blocks():
             self.pc = self.pc + 1
+            inst = self.instructions[self.pc - 1]
             self.instructions[self.pc - 1].execute(self)
 
         return
@@ -265,7 +266,7 @@ class print_str(Instruction):
         super().__init__(name, arg1)
 
     def execute(self, TISC):
-        print(self.arg1)
+        print(self.arg1.replace('"', ''), end='')
         return
 
     def __repr__(self):
@@ -298,7 +299,7 @@ class push_arg(Instruction):
         super().__init__(name, arg1, arg2)
 
     def execute(self, TISC):
-        value = TISC.execution_memory.get_value_var(TISC.sp, self.arg1, self.arg2)
+        value = TISC.execution_memory.get_value_arg(TISC.sp, self.arg1, self.arg2)
         TISC.avaliation_stack.append(value)
 
     def __repr__(self):
@@ -400,7 +401,7 @@ class f_print(Instruction):
 
     def execute(self, TISC):
         value = TISC.avaliation_stack.pop()
-        print(value, )
+        print(value, end='')
 
     def __repr__(self):
         return str(self.name)
@@ -415,7 +416,7 @@ class f_printnl(Instruction):
         super().__init__(name)
 
     def execute(self, TISC):
-        print('\n')
+        print('')
         return
 
     def __repr__(self):

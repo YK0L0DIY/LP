@@ -6,9 +6,15 @@ clean:
 	rm parser.out parsetab.py
 
 run_file:
+	python3 main.py -f $(FILE)
+
+run_file_memory_lables:
 	python3 main.py -m -l -f $(FILE)
 
 run:
+	python3 main.py -m -l
+
+run_memory_lables:
 	python3 main.py -m -l
 
 help:

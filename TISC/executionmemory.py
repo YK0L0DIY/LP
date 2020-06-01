@@ -82,28 +82,28 @@ class ExecutionMemory:
             return self.get_var(pos, var)
         else:
             previous_block = self.get_CL(pos)
-            self.get_value_var(previous_block, distance - 1, var)
+            return self.get_value_var(previous_block, distance - 1, var)
 
     def store_value_var(self, pos, distance, var, value):
         if distance == 0:
             return self.set_var(pos, var, value)
         else:
             previous_block = self.get_CL(pos)
-            self.store_value_var(previous_block, distance - 1, var, value)
+            return self.store_value_var(previous_block, distance - 1, var, value)
 
     def get_value_arg(self, pos, distance, arg):
         if distance == 0:
             return self.get_arg(pos, arg)
         else:
             previous_block = self.get_CL(pos)
-            self.get_value_arg(previous_block, distance - 1, arg)
+            return self.get_value_arg(previous_block, distance - 1, arg)
 
     def store_value_arg(self, pos, distance, arg, value):
         if distance == 0:
             return self.set_arg(pos, arg, value)
         else:
             previous_block = self.get_CL(pos)
-            self.store_value_arg(previous_block, distance - 1, arg, value)
+            return self.store_value_arg(previous_block, distance - 1, arg, value)
 
     def have_blocks(self):
         if len(self.stack) != 0:

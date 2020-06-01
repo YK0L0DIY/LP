@@ -14,8 +14,10 @@ b:	locals 0 0
 	call 0 c
 	return
 c:	locals 0 0
-	push_var 1 1
+	push_var 2 1
+	# push_var 1 1
 	push_int 2
 	mult
-	store_var 1 1	# x *= 2
+	store_var 2 1	# x *= 2
+	# store_var 1 1
 	return

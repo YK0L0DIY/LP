@@ -1,3 +1,5 @@
+import sys
+
 import ply.yacc as yacc
 import argparse
 from tekens import tokens
@@ -114,11 +116,15 @@ def p_error(p):
 
 def main(print_inst, print_labels, filepath=None):
     parser = yacc.yacc()
-    if not filepath:
+    if filepath:
         filepath = input('Path to the file:')
 
-    with open(filepath) as fp:
-        parser.parse(fp.read())
+        with open(filepath) as fp:
+            parser.parse(fp.read())
+
+    else:
+        for line in sys.stdin:
+            parser.parse(line)
 
     if print_inst:
         tisc.print_instructions()

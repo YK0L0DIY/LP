@@ -15,4 +15,5 @@ if __name__ == '__main__':
                         required=False)
 
     args = parser.parse_args()
-    main(args.memory, args.labels,args.file_path)
+
+    main(args.memory, args.labels, args.file_path)
