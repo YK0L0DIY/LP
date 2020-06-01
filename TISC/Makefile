@@ -12,7 +12,7 @@ run_file_memory_lables:
 	python3 main.py -m -l -f $(FILE)
 
 run:
-	python3 main.py -m -l
+	python3 main.py
 
 run_memory_lables:
 	python3 main.py -m -l

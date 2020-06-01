@@ -81,28 +81,28 @@ class ExecutionMemory:
         if distance == 0:
             return self.get_var(pos, var)
         else:
-            previous_block = self.get_CL(pos)
+            previous_block = self.get_AL(pos)
             return self.get_value_var(previous_block, distance - 1, var)
 
     def store_value_var(self, pos, distance, var, value):
         if distance == 0:
             return self.set_var(pos, var, value)
         else:
-            previous_block = self.get_CL(pos)
+            previous_block = self.get_AL(pos)
             return self.store_value_var(previous_block, distance - 1, var, value)
 
     def get_value_arg(self, pos, distance, arg):
         if distance == 0:
             return self.get_arg(pos, arg)
         else:
-            previous_block = self.get_CL(pos)
+            previous_block = self.get_AL(pos)
             return self.get_value_arg(previous_block, distance - 1, arg)
 
     def store_value_arg(self, pos, distance, arg, value):
         if distance == 0:
             return self.set_arg(pos, arg, value)
         else:
-            previous_block = self.get_CL(pos)
+            previous_block = self.get_AL(pos)
             return self.store_value_arg(previous_block, distance - 1, arg, value)
 
     def have_blocks(self):
@@ -110,3 +110,9 @@ class ExecutionMemory:
             return True
         else:
             return False
+
+    def get_correct_AL(self, sp, distancia):
+        if distancia == 0:
+            return self.get_AL(sp)
+        else:
+            return self.get_correct_AL(self.get_AL(sp), distancia - 1)

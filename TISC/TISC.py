@@ -11,6 +11,7 @@ class TISC:
     execution_memory = ExecutionMemory()
     number_instructions = 0
     set_args = {}
+    set_AL = 0
 
     def new_label(self, label):
         self.labels[label] = self.number_instructions
@@ -348,11 +349,16 @@ class call(Instruction):
 
     def execute(self, TISC):
         sp = TISC.sp
+        al = TISC.execution_memory.get_AL(sp)
         TISC.sp = TISC.execution_memory.new_block()
         TISC.execution_memory.set_CL(TISC.sp, sp)
         TISC.execution_memory.set_ER(TISC.sp, TISC.pc)
         TISC.pc = TISC.labels[self.arg2]
-        # TODO perguntyar por causa da profundidade??
+
+        if self.arg1 == -1:
+            TISC.set_AL = sp
+        elif self.arg1 == 0:
+            TISC.set_AL = TISC.execution_memory.get_correct_AL(sp, self.arg1)
 
     def __repr__(self):
         return str(self.name) + ", " + str(self.arg1) + ", " + str(self.arg2)
@@ -369,6 +375,7 @@ class f_locals(Instruction):
     def execute(self, TISC):
         TISC.execution_memory.set_number_of_vars(TISC.sp, self.arg2)
         TISC.execution_memory.set_number_of_args(TISC.sp, self.arg1, TISC.set_args)
+        TISC.execution_memory.set_AL(TISC.sp, TISC.set_AL)
         TISC.set_args = {}
 
     def __repr__(self):
