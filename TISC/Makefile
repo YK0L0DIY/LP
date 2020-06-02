@@ -3,7 +3,7 @@ PYV=$(shell python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_in
 defoult: run
 
 clean:
-	rm parser.out parsetab.py
+	rm -rf parser.out parsetab.py __pycache__/
 
 run_file:
 	python3 main.py -f $(FILE)

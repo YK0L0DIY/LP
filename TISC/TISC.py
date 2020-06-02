@@ -34,7 +34,6 @@ class TISC:
         self.pc = self.labels['program'] or 0
         while self.execution_memory.have_blocks():
             self.pc = self.pc + 1
-            inst = self.instructions[self.pc - 1]
             self.instructions[self.pc - 1].execute(self)
 
         return
