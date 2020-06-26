@@ -11,7 +11,8 @@ tisc = TISC()
 
 # para verificar linha a linha
 def p_programa(t):
-    'programa : programa etiqueta instrucao '
+    '''programa : programa etiqueta instrucao
+                | etiqueta'''
     pass
 
 
