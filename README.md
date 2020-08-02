@@ -1,3 +1,7 @@
+### Description
+
+Repository for Programming Languages Class
+
 ### How to run prolog
 
 Install prolog 
